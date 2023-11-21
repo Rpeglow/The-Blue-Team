@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from UserInfo.views import user_info_form
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('user-info/', user_info_form, name='user_info_form')
 ]
