@@ -11,5 +11,15 @@
     <body>
         <h1>Welcome to the Student Career Development System</h1>
         <h2>We are here to make the next step easier!</h2>
+        {% for image in images %}
+            <div style="display: inline-block; margin: 10px;">
+                <a href="{% url 'image_detail' image.id %}">
+                    <img src="{{ image.image_url }}" alt="{{ image.description }}">
+                </a>
+                <div style="margin-top: 5px;">
+                    <p>{{ image.description }}</p>
+                </div>
+            </div>
+        {% endfor %}
     </body>
 </html>

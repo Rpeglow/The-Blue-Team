@@ -18,3 +18,8 @@ class Skill(models.Model):
     
     def __str__(self):
         return self.skill_id + self.skill_keyword
+    
+class Image(models.Model):
+    image_url = models.URLField()
+    description = models.CharField(max_length=255)
+    
