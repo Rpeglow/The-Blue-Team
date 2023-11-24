@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course & Skill Search</title>
+</head>
+<body>
+    <h1>Course & Skill Search</h1>
+    <p>If you have not created a student profile, click here: <a href="/newuser/">Create a New User</a></p>
+
+    <h2>Search for a Course</h2>
+    <p>Search for a course by prefix and number. For example, to search for SDEV 240, select "SDEV" from the dropdown menu and enter "240" in the text box.</p>
+    <form method="post" action="{% url 'search_course' %}">
+        {% csrf_token %}
+        
+        <label for="user">Select User:</label>
+        <select name="user" id="user">
+            {% for user in users %}
+                <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="prefix">Select Class Prefix:</label>
+        <select name="prefix" id="prefix">
+            {% for prefix in prefixes %}
+                <option value="{{ prefix }}">{{ prefix }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="class_number">Enter Class Number:</label>
+        <input type="text" name="class_number" id="class_number">
+        
+        <button type="submit">Search</button>
+    </form>
+</body>
+</html>
