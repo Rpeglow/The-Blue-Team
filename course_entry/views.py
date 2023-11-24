@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Course, Image
+from .models import Image
 
 # Create your views here.
 def course_list(request):

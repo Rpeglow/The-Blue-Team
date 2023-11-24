@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import Course, Skill, Image
 
-admin.site.register(Course)
-admin.site.register(Skill)
+from .models import Image
+
 admin.site.register(Image)
 # Register your models here.

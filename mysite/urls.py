@@ -21,5 +21,6 @@ from django.urls import path, include
 urlpatterns = [
     path('',include('course_entry.urls')),
     path('admin/', admin.site.urls),
-    path('user-info/', user_info_form, name='user_info_form')
-]
+    path('newuser/', include('UserInfo.urls')),
+    path('classtracker/', include('ClassTracker.urls'))
+ ]
