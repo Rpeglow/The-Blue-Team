@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from UserInfo.views import user_info_form
+from ResumeBuilder import views
 from django.urls import path, include
 
 urlpatterns = [
     path('',include('course_entry.urls')),
     path('admin/', admin.site.urls),
     path('newuser/', include('UserInfo.urls')),
-    path('classtracker/', include('ClassTracker.urls'))
+    path('classtracker/', include('ClassTracker.urls')),
+    path('resumebuilder/', views.resume)
  ]

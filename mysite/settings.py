@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'course_entry',
     'UserInfo',
-    'ClassTracker'
+    'ClassTracker',
+    'ResumeBuilder'
 ]
 
 MIDDLEWARE = [
