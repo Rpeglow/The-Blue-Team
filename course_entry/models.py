@@ -5,6 +5,7 @@ from django.utils import timezone
 class Image(models.Model):
     image_url = models.URLField()
     description = models.CharField(max_length=255)
+    page = models.CharField(max_length=255)
 
     def __str__(self):
         return self.description
