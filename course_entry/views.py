@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from .models import Image
 
 # Create your views here.
@@ -11,4 +11,9 @@ def image_page(request):
 
 def image_detail(request, image_id):
     image = get_object_or_404(Image, id=image_id)
-    return render(request, 'course_entry/image_detail.html', {'image': image})
+    
+    app_name = image.page
+    
+    app_url = f'/{app_name}/'
+    
+    return redirect(app_url)
