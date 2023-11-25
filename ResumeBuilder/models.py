@@ -9,7 +9,7 @@ from ClassTracker.models import Course
 
 class WorkHistory(models.Model):
     company_name = models.CharField(max_length=100)
-    word_address = models.CharField(max_length=100)
+    work_address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=30)
     zip = models.CharField(max_length=15)
