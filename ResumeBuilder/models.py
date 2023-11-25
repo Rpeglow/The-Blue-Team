@@ -16,7 +16,7 @@ class WorkHistory(models.Model):
     phone = models.CharField(max_length=20)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
- # Needs user_id still
+    user = models.ForeignKey(UserInformation, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.company_name}'
