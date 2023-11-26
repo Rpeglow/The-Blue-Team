@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE>
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Resume Builder</title>
+        <link rel="stylesheet" href="{% static 'css/ResumeBuilder.css' %}">
+    </head>
+
+    <body>
+        <h1>Welcome to the Resume Builder Portion!</h1>
+        <h2>Take your time and develop a working portfolio</h2>
+        
+    <div id='WorkEducation'>
+        <div id='workHistory'>
+            <h3>Work History</h3>
+            <form>
+                <label for="cname">Company:</label><br>
+                <input type="text" id="cname" name="cname"><br>
+                <label for="cadd">Address:</label><br>
+                <input type="text" id="cadd" name="cadd"><br>
+                <label for="ccity">City:</label><br>
+                <input type="text" id="ccity" name="ccity"><br>
+                <label for="cstate">State:</label><br>
+                <input type="text" id="cstate" name="cstate"><br>
+                <label for="czip">Zip:</label><br>
+                <input type="text" id="czip" name="czip"><br>
+                <label for="cphone">Phone:</label><br>
+                <input type="tel" id="cphone" name="cphone"><br>
+                <label for="cstart">State Date:</label><br>
+                <input type="date" id="cstart" name="cstart"><br>
+                <label for="cend">End Date:</label><br>
+                <input type="date" id="cend" name="cend"><br>
+                <input type="submit" id="submitOne" value="Submit">
+            </form>
+        </div>
+
+        <div id='education'>
+            <h3>Education</h3>
+            <form>
+                <label for="sname">School:</label><br>
+                <input type="text" id="sname" name="sname"><br>
+                <label for="sstate">State:</label><br>
+                <input type="text" id="sstate" name="sstate"><br>
+                <label for="scity">City:</label><br>
+                <input type="text" id="scity" name="scity"><br>
+                <label for="degree">Degree/Certification:</label><br>
+                <input type="text" id="degree" name="degree"><br>
+                <label for="sstart">Start Date:</label><br>
+                <input type="date" id="sstart" name="sstart"><br>
+                <label for="schoolend">End Date:</label><br>
+                <input type="date" id="schoolend" name="schoolend"><br>
+                <input type="submit" id="submitTwo" value="Submit">
+            </form>
+
+        </div>
+
+        <div id='skills'>
+            <h3>Your Skills:</h3>
+            <ul>
+            {% for keyword in keywords %}
+                <li>{{keyword.skill_keyword}}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+        
+    </body>
+</html>

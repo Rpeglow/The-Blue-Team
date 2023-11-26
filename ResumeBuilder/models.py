@@ -24,7 +24,6 @@ class Education(models.Model):
     school_state = models.CharField(max_length=100)
     school_city = models.CharField(max_length=100)
     degree = models.CharField(max_length=100)
-    certification = models.CharField(max_length=100, null=True)
     school_start_date = models.DateTimeField()
     school_end_date = models.DateTimeField()
     user = models.ForeignKey(UserInformation, on_delete=models.CASCADE)
