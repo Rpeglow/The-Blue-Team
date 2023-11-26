@@ -32,29 +32,68 @@ def scrape_course_data(class_number):
             best_match_element = WebDriverWait(driver, 20).until(
                 EC.presence_of_element_located((By.XPATH, "//a[contains(.,'Best Match:')]"))
             )
+
+            main_window = driver.current_window_handle
             best_match_element.click()
+            WebDriverWait(driver, 20).until(EC.number_of_windows_to_be(2))
+            all_windows = driver.window_handles
 
-            course_heading_element = WebDriverWait(driver, 20).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, ".coursepadding h3"))
-            )
+            if len(all_windows) > 1:
+                for window in all_windows:
+                    if window != main_window:
+                        driver.switch_to.window(window)
+                        course_heading_element = WebDriverWait(driver, 20).until(
+                            EC.presence_of_element_located((By.CSS_SELECTOR, ".toplevel_popup h1"))
+                        )
+                        course_heading_text = course_heading_element.text.strip()
+                        course_number, course_name = map(str.strip, course_heading_text.split('-', 1))
 
-            course_heading_text = course_heading_element.text.strip()
-            course_number, course_name = map(str.strip, course_heading_text.split('-', 1))
+                        course_text_element = WebDriverWait(driver, 20).until(
+                            EC.presence_of_element_located((By.CSS_SELECTOR, ".block_content_popup"))
+                        )
+                        course_text = course_text_element.text.strip()
 
-            course_text_element = WebDriverWait(driver, 20).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, ".coursepadding > div:nth-child(2)"))
-            )
+                        description_pattern = r'DATE OF LAST REVISION:.+\s\s(?P<description>.*)\s\sMAJOR COURSE LEARNING OBJECTIVES'
 
-            course_text = course_text_element.text.strip()
+                        match = re.search(description_pattern, course_text, re.DOTALL)
+                        if match:
+                            course_description = match.group('description').strip()
+                        else:
+                            course_description = "Not found"
 
-            description_pattern = r'DATE OF LAST REVISION:.+\s\s(?P<description>.*)\s\sMAJOR COURSE LEARNING OBJECTIVES'
+                        print(course_number)
+                        print(course_name)
+                        print(course_description)
 
-            match = re.search(description_pattern, course_text, re.DOTALL)
-            if match:
-                course_description = match.group('description').strip()
+                        driver.close()
+                        driver.switch_to.window(main_window)
+                        break
             else:
-                course_description = "Not found"
+                course_heading_element = WebDriverWait(driver, 20).until(
+                    EC.presence_of_element_located((By.CSS_SELECTOR, ".coursepadding h3"))
+                )
+                course_heading_text = course_heading_element.text.strip()
+                course_number, course_name = map(str.strip, course_heading_text.split('-', 1))
 
+                course_text_element = WebDriverWait(driver, 20).until(
+                    EC.presence_of_element_located((By.CSS_SELECTOR, ".coursepadding > div:nth-child(2)"))
+                )
+                course_text = course_text_element.text.strip()
+
+                description_pattern = r'DATE OF LAST REVISION:.+\s\s(?P<description>.*)\s\sMAJOR COURSE LEARNING OBJECTIVES'
+
+                match = re.search(description_pattern, course_text, re.DOTALL)
+                if match:
+                    course_description = match.group('description').strip()
+                else:
+                    course_description = "Not found"
+
+                driver.quit()
+
+                print(course_number)
+                print(course_name)
+                print(course_description)
+            
             return course_number, course_name, course_description
 
         except Exception as e:
