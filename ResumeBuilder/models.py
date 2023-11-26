@@ -3,9 +3,7 @@ from django.db import models
 from django.utils import timezone
 from UserInfo.models import UserInformation
 from ClassTracker.models import Course
-
-
-
+from ClassTracker.models import Skill
 
 class WorkHistory(models.Model):
     company_name = models.CharField(max_length=100)
@@ -20,3 +18,22 @@ class WorkHistory(models.Model):
 
     def __str__(self):
         return f'{self.company_name}'
+    
+class Education(models.Model):
+    school_name = models.CharField(max_length=100)
+    school_state = models.CharField(max_length=100)
+    school_city = models.CharField(max_length=100)
+    degree = models.CharField(max_length=100)
+    certification = models.CharField(max_length=100, null=True)
+    school_start_date = models.DateTimeField()
+    school_end_date = models.DateTimeField()
+    user = models.ForeignKey(UserInformation, on_delete=models.CASCADE)
+        
+        
+def __str__(self):
+    return f'{self.school_name}, {self.degree}'
+
+
+class PopulateKeywords(models.Model):
+    skill_keyword = models.ForeignKey(Skill, on_delete=models.CASCADE)
+        

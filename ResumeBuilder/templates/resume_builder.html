@@ -8,6 +8,15 @@
     <body>
         <h1>Welcome to the Resume Builder Portion!</h1>
         <h2>Take your time and develop a working portfolio</h2>
+        
+        <div id='keyword_container'>
+            <h3>Your Skills:</h3>
+            <ul>
+            {% for keyword in keywords %}
+                <li>{{keyword.skill_keyword}}</li>
+            {% endfor %}
+            </ul>
+        </div>
     </body>
 
 
