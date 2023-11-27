@@ -15,7 +15,7 @@
     <div class='resumeFields'>
         <div id='workHistory'>
             <h3>Work History</h3>
-            <form>
+            <form method="POST">{% csrf_token %}
                 <label for="cname">Company:</label><br>
                 <input type="text" id="cname" name="cname"><br>
                 <label for="cadd">Address:</label><br>
