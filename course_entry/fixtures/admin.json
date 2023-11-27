@@ -1,0 +1,20 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$600000$yV7c3WjU42djYxwKRi1Bmc$/DnyPlc+HNh0zr9waP38xhLKxAuaa2LVWOtISgD+a+o=",
+            "last_login": "2023-11-21T17:00:19.463Z",
+            "is_superuser": true,
+            "username": "BlueTeam",
+            "first_name": "",
+            "last_name": "",
+            "email": "jbaeten@ivytech.edu",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2023-11-21T14:43:50.324Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    }
+]
