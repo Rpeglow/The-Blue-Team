@@ -38,7 +38,7 @@
 
         <div id='education'>
             <h3>Education</h3>
-            <form>
+            <form method='POST'> {% csrf_token %}
                 <label for="sname">School:</label><br>
                 <input type="text" id="sname" name="sname"><br>
                 <label for="sstate">State:</label><br>

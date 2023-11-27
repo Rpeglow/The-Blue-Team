@@ -22,6 +22,19 @@ def send_work_history(request):
         work_history_entry.save()
     return render(request, 'ResumeBuilder/resumer_builder.html', {})
 
+def send_edcation(request):
+    if request.method == 'POST':
+        school_name =request.POST['sname']
+        school_state = request.POST['sstate']
+        school_city = request.POST['scity']
+        degree = request.POST['degree']
+        school_start_date =request.POST['sstart']
+        school_end_date = request.POST['schoolend']
+    
+        eduction_entry = Education(school_name,school_state,school_city,degree,school_start_date, school_end_date)
+        eduction_entry.save()
+    return render(request, 'ResumeBuilder/resumer_builder.html', {})
+
 def resume(request):
     keywords = Skill.objects.all()
     return render(request, 'ResumeBuilder/resume_builder.html', {'keywords': keywords})
