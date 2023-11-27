@@ -3,6 +3,7 @@
 <head>
     <style>
         body {
+            
             background-color: #D3D3D3;
             font-family: Engschrift, "Helvetica Neue", Helvetica, Arial, sans-serif;
             text-align: center;
@@ -18,58 +19,7 @@
         }
        
        
-        .image-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .image-container>div {
-            margin: 10px;
-            text-align: center;
-        }
-
-        img {
-            align-items: center;
-            max-width: 400px;
-            max-height: 400px;
-            object-fit: cover;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .image-container div {
-            position: relative;
-            display: inline-block;
-        }
-
-        .image-container div img {
-            max-width: 400px;
-            max-height: 400px;
-            object-fit: cover;
-            height: 100vh;
-            margin: 0;
-            display: block;
-            border: 1px solid black;
-            border-radius: 5px;
-        }
-
-        .image-container div h3 {
-            position: absolute;
-            bottom: 150px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            text-shadow: -2px -2px 0 #000,
-                2px -2px 0 #000,
-                -2px 2px 0 #000,
-                2px 2px 0 #000;
-            font-size: 60px;
-            padding: 5px;
-        }
+        
 
         /* Styles for the navigation bar */
         .navbar {
@@ -101,9 +51,10 @@
             text-align: center;
             padding: 1px 0;
         }
+
         /* Styles for the content */
         .content {
-            padding: 75px;
+            padding-bottom: 75px;
             
         }
     </style>
