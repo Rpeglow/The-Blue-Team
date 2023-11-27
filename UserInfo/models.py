@@ -5,7 +5,7 @@ class UserInformation(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     middle_initial = models.CharField(max_length=1, blank=True, null=True)
-    address = models.TextField()
+    address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=50)
     zip_code = models.CharField(max_length=20)
