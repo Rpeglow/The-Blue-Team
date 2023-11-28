@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>No Jobs Found</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{%load static%}
+
+{% block title %}
+No Jobs Found
+{% endblock %}
+
+{% block content %}
+
     <div class="container">
         <h1>No Jobs Found</h1>
         <p>Sorry, there are currently no jobs available based on your search criteria.</p>
         <p><a href="{% url 'job_search' %}">Back to Job Search</a></p>
     </div>
-</body>
-</html>
+{% endblock %}

@@ -1,8 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Job Search
+{% endblock %}
+
+{% block content %}
 <head>
-    <meta charset="UTF-8">
-    <title>Job Search</title>
     <script>
         function displaySkills(select) {
             const userId = select.value;
@@ -48,4 +52,4 @@
         <button type="submit">Search Jobs</button>
     </form>
 </body>
-</html>
+{% endblock %}
