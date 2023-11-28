@@ -19,7 +19,13 @@ Resume Builder
     <div class='resumeFields'>
         <div id='workHistory'>
             <h3>Work History</h3>
-            <form method="POST">{% csrf_token %}
+            <form method="POST" action="{% url 'send_work_history' %}">{% csrf_token %}
+            <label for="user">Select User:</label>
+            <select name="user" id="user">
+            {% for user in users %}
+                <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+            {% endfor %}
+            </select><br>
                 <label for="cname">Company:</label><br>
                 <input type="text" id="cname" name="cname"><br>
                 <label for="cadd">Address:</label><br>

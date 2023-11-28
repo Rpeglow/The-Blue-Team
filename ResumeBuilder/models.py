@@ -6,6 +6,7 @@ from ClassTracker.models import Course
 from ClassTracker.models import Skill
 
 class WorkHistory(models.Model):
+    user = models.ForeignKey(UserInformation, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=100)
     work_address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
@@ -14,7 +15,6 @@ class WorkHistory(models.Model):
     phone = models.CharField(max_length=20)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
-    user = models.ForeignKey(UserInformation, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.company_name}'
