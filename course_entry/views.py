@@ -17,3 +17,9 @@ def image_detail(request, image_id):
     app_url = f'/{app_name}/'
     
     return redirect(app_url)
+
+def about(request):
+    return render(request, 'course_entry/about.html', {})
+
+def FQA(request):
+    return render(request, 'course_entry/FQA.html', {})
