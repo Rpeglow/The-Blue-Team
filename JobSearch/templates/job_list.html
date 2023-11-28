@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Job List</title>
-    <style>
-        /* Add your CSS styles here */
-    </style>
 </head>
 <body>
     <h1>Jobs Found</h1>
@@ -24,6 +21,7 @@
         {% else %}
             <p>No jobs found based on your search criteria.</p>
         {% endif %}
+        <p><a href="{% url 'job_search' %}">Back to Job Search</a></p>
     </div>
 </body>
 </html>

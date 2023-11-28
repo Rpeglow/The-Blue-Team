@@ -52,3 +52,8 @@ def confirm_job_search(request):
                 return render(request, 'job_list.html', {'jobs': jobs})
 
     return render(request, 'no_jobs_found.html')
+
+def load_previous_jobs(request):
+    jobs = Job.objects.all()
+
+    return render(request, 'job_list.html', {'jobs': jobs})

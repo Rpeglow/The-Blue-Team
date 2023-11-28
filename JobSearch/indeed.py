@@ -26,11 +26,16 @@ def perform_job_search(keywords, location="chicago", fromage="3", radius="50", p
             extracted_jobs = []
 
             for job in jobs:
+                min_salary = job['salary'].get('min')
+                max_salary = job['salary'].get('max')
+
+                salary_range = f"{min_salary}-{max_salary} {job['salary'].get('type')}" if min_salary is not None and max_salary is not None else "N/A"
+
                 extracted_job = {
                     "job_name": job.get("title"),
                     "salary_range": f"{job['salary'].get('min', '')}-{job['salary'].get('max', '')} {job['salary'].get('type', '')}",
                     "description": f"{job['company_name']} - {job['location']}",
-                    "hyperlink": f"https://www.indeed.com{job['link']}"
+                    "hyperlink": f"https://www.indeed.com/viewjob?jk={job['link'].split('?')[0]}"
                 }
                 extracted_jobs.append(extracted_job)
 
@@ -38,4 +43,4 @@ def perform_job_search(keywords, location="chicago", fromage="3", radius="50", p
         else:
             return None
 
-#perform_job_search(keywords=['python', 'django', 'javascript'], location="Indianapolis, IN")
+#perform_job_search(keywords=['C# programming', 'Databases'], location="Indianapolis, IN")
