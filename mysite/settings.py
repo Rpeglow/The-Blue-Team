@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-h*51%(m^!h-9eo&-3e8ouw!je2-i2pye+7n$xx&2qkou$c8r)*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'course_entry',
     'UserInfo',
     'ClassTracker',
-    'JobSearch'
+    'JobSearch',
     'ResumeBuilder'
 ]
 
