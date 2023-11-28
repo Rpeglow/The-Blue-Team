@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Skill
 from django.http import HttpResponse
 from .models import WorkHistory
 from .models import Education
 from .models import UserInformation
+
 
 def resume_builder(request):
     users = UserInformation.objects.all()
@@ -19,14 +20,18 @@ def send_work_history(request):
         phone = request.POST['cphone']
         start_date = request.POST['cstart']
         end_date = request.POST['cend']
-        # user info
+        user_id = request.POST['user']
+        
+        user = get_object_or_404(UserInformation, pk=user_id)
+
         
         # Conditionals Here for error handling
         
-        work_history_entry = WorkHistory.objects.get_or_create(company_name, work_address, city, state, zip, phone, start_date, end_date)
-        
-        work_history_entry.save()
-    return render(request, 'ResumeBuilder/resumer_builder.html', {})
+        work_history_entry = WorkHistory.objects.get_or_create(
+        company_name = company_name,
+        defaults={'user': user, 'work_address': work_address, 'city': city, 'state': state, 'zip': zip, 'phone': phone, 'start_date': start_date, 'end_date': end_date}
+        )
+    return render(request, 'ResumeBuilder/resume_builder.html', {})
 
 def send_education(request):
     if request.method == 'POST':
