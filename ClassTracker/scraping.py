@@ -62,10 +62,6 @@ def scrape_course_data(class_number):
                         else:
                             course_description = "Not found"
 
-                        print(course_number)
-                        print(course_name)
-                        print(course_description)
-
                         driver.close()
                         driver.switch_to.window(main_window)
                         break

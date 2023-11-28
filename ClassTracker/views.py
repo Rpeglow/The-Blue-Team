@@ -6,7 +6,7 @@ from .ai import generate_skills_from_description
 
 MAX_SKILLS_PER_CLASS = 10
 
-def index(request):
+def class_tracker(request):
     prefixes = [
     "ABRK", "ACCT", "ADMF", "AGRI", "ALTF", "AMSL", "ANTH", "AOLS", "APHY", "ARAB",
     "ARTH", "ARTS", "ASTR", "AUBR", "AUTI", "AVIM", "AVIT", "BCOM", "BCOT", "BCTI",
@@ -26,7 +26,7 @@ def index(request):
 
     users = UserInformation.objects.all()
     
-    return render(request, 'index.html', {'prefixes': prefixes, 'users': users})
+    return render(request, 'class_tracker.html', {'prefixes': prefixes, 'users': users})
 
 
 def search_course(request):
