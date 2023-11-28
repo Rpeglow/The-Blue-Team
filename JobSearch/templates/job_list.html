@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job List</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <h1>Jobs Found</h1>
+    <div class="job-list">
+        {% if jobs %}
+            <ul>
+                {% for job in jobs %}
+                    <li>
+                        <h2>{{ job.job_name }}</h2>
+                        <p>Salary Range: {{ job.salary_range }}</p>
+                        <p>Description: {{ job.description }}</p>
+                        <a href="{{ job.hyperlink }}" target="_blank">Job Link</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No jobs found based on your search criteria.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

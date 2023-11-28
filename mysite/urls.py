@@ -22,5 +22,6 @@ urlpatterns = [
     path('',include('course_entry.urls')),
     path('admin/', admin.site.urls),
     path('newuser/', include('UserInfo.urls')),
-    path('classtracker/', include('ClassTracker.urls'))
+    path('classtracker/', include('ClassTracker.urls')),
+    path('jobsearch/', include('JobSearch.urls'))
  ]
