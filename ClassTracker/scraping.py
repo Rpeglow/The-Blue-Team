@@ -97,5 +97,7 @@ def scrape_course_data(class_number):
             print("Best Match element not found:", e)
             return None
 
+
     finally:
         driver.quit()
+
