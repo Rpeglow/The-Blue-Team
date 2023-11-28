@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'UserInfo',
     'ClassTracker',
     'JobSearch'
+    'ResumeBuilder'
 ]
 
 MIDDLEWARE = [
