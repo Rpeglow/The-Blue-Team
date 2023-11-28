@@ -24,5 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('newuser/', include('UserInfo.urls')),
     path('classtracker/', include('ClassTracker.urls')),
-    path('resumebuilder/', views.resume)
+    path('resumebuilder/', include('ResumeBuilder.urls'))
  ]

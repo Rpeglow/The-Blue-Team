@@ -3,6 +3,11 @@ from .models import Skill
 from django.http import HttpResponse
 from .models import WorkHistory
 from .models import Education
+from .models import UserInformation
+
+def resume_builder(request):
+    users = UserInformation.objects.all()
+    return render(request, 'ResumeBuilder/resume_builder.html', {'users': users})
 
 def send_work_history(request):
     if request.method == 'POST':
@@ -18,11 +23,12 @@ def send_work_history(request):
         
         # Conditionals Here for error handling
         
-        work_history_entry = WorkHistory(company_name, work_address, city, state, zip, phone, start_date, end_date)
+        work_history_entry = WorkHistory.objects.get_or_create(company_name, work_address, city, state, zip, phone, start_date, end_date)
+        
         work_history_entry.save()
     return render(request, 'ResumeBuilder/resumer_builder.html', {})
 
-def send_edcation(request):
+def send_education(request):
     if request.method == 'POST':
         school_name =request.POST['sname']
         school_state = request.POST['sstate']
@@ -31,9 +37,11 @@ def send_edcation(request):
         school_start_date =request.POST['sstart']
         school_end_date = request.POST['schoolend']
     
-        eduction_entry = Education(school_name,school_state,school_city,degree,school_start_date, school_end_date)
+        eduction_entry = Education.objects.get_or_create(school_name,school_state,school_city,degree,school_start_date, school_end_date)
         eduction_entry.save()
     return render(request, 'ResumeBuilder/resumer_builder.html', {})
+
+
 
 def resume(request):
     keywords = Skill.objects.all()
