@@ -33,9 +33,9 @@ def perform_job_search(keywords, location="chicago", fromage="3", radius="50", p
 
                 extracted_job = {
                     "job_name": job.get("title"),
-                    "salary_range": f"{job['salary'].get('min', '')}-{job['salary'].get('max', '')} {job['salary'].get('type', '')}",
+                    "salary_range": salary_range,
                     "description": f"{job['company_name']} - {job['location']}",
-                    "hyperlink": f"https://www.indeed.com/viewjob?jk={job['link'].split('?')[0]}"
+                    "hyperlink": f"https://www.indeed.com/viewjob?jk={(job['link'].split('?')[0]).replace('/job/', '')}"
                 }
                 extracted_jobs.append(extracted_job)
 
