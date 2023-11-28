@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            
+            background-color: #D3D3D3;
+            font-family: Engschrift, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+        }
+        h1 {
+            color: #41AD49;
+            text-align: center;
+        }
+        h2 {
+            color: #8dc63f;
+            text-align: center;
+        }
+       
+       
+        
+
+        /* Styles for the navigation bar */
+        .navbar {
+            background-color: #006648;
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            color: #939598;
+        }
+
+        /* Styles for the footer */
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1px 0;
+        }
+
+        /* Styles for the content */
+        .content {
+            padding-bottom: 75px;
+            
+        }
+    </style>
+
+
+<title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <div class="navbar">
+        <a href="{% url 'image_page' %}">Home</a>
+        <a href="{% url 'class_tracker' %}">Course & Skill Search</a>
+        <a href="{% url 'user_info_form' %}">New User Creation</a>
+        <a href="{% url 'send_work_history' %}">Resume Builder</a>
+       
+    </div>
+
+<div class="content">
+    {% block content %}
+    <!-- Main Content goes here -->
+    {% endblock %}
+</div>
+
+    <div class="footer">
+        <p>Copyright &copy; 2023 Student Career Development System</p>
+    </div>
+</body>
+</html>
