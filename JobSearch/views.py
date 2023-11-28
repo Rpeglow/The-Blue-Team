@@ -35,15 +35,17 @@ def confirm_job_search(request):
 
             if jobs:
                 for job_data in jobs:
-                    job = Job.objects.create(
-                        user=user,
-                        job_name=job_data['job_name'],
-                        salary_range=job_data['salary_range'],
-                        description=job_data['description'],
-                        hyperlink=job_data['hyperlink']
-                    )
-                    job.save()
-
+                    existing_job = Job.objects.filter(job_name=job_data['job_name']).first()
+                    if not existing_job:
+                        job = Job.objects.create(
+                            user=user,
+                            job_name=job_data['job_name'],
+                            salary_range=job_data['salary_range'],
+                            description=job_data['description'],
+                            hyperlink=job_data['hyperlink']
+                        )
+                        job.save()
+                        
                 return render(request, 'job_list.html', {'jobs': jobs})
 
     return render(request, 'no_jobs_found.html')

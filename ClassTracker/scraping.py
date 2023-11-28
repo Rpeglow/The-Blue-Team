@@ -1,4 +1,5 @@
 import re
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -35,7 +36,7 @@ def scrape_course_data(class_number):
 
             main_window = driver.current_window_handle
             best_match_element.click()
-            WebDriverWait(driver, 20).until(EC.number_of_windows_to_be(2))
+            time.sleep(20)
             all_windows = driver.window_handles
 
             if len(all_windows) > 1:
@@ -60,10 +61,6 @@ def scrape_course_data(class_number):
                             course_description = match.group('description').strip()
                         else:
                             course_description = "Not found"
-
-                        print(course_number)
-                        print(course_name)
-                        print(course_description)
 
                         driver.close()
                         driver.switch_to.window(main_window)
