@@ -2,8 +2,8 @@
 <html>
 <head>
     <style>
+        /* Common styles for both mobile and desktop */
         body {
-            
             background-color: #D3D3D3;
             font-family: Engschrift, "Helvetica Neue", Helvetica, Arial, sans-serif;
             text-align: center;
@@ -17,16 +17,10 @@
             color: #8dc63f;
             text-align: center;
         }
-       
-       
-        
-
-        /* Styles for the navigation bar */
         .navbar {
             background-color: #006648;
             overflow: hidden;
         }
-
         .navbar a {
             float: left;
             display: block;
@@ -35,12 +29,9 @@
             padding: 14px 16px;
             text-decoration: none;
         }
-
         .navbar a:hover {
-            color: #939598;
+            background-color: #939598;
         }
-
-        /* Styles for the footer */
         .footer {
             position: fixed;
             left: 0;
@@ -51,16 +42,22 @@
             text-align: center;
             padding: 1px 0;
         }
-
-        /* Styles for the content */
         .content {
             padding-bottom: 75px;
-            
+        }
+
+        /* Styles for mobile devices */
+        @media only screen and (max-width: 600px) {
+            /* Add your mobile-specific styles here */
+        }
+
+        /* Styles for desktop devices */
+        @media only screen and (min-width: 601px) {
+            /* Add your desktop-specific styles here */
         }
     </style>
 
-
-<title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
     <!-- Navigation bar -->
@@ -70,14 +67,13 @@
         <a href="{% url 'user_info_form' %}">New User Creation</a>
         <a href="{% url 'resume_builder' %}">Resume Builder</a>
         <a href="{% url 'job_search' %}">Job Search</a>
-       
     </div>
 
-<div class="content">
-    {% block content %}
-    <!-- Main Content goes here -->
-    {% endblock %}
-</div>
+    <div class="content">
+        {% block content %}
+        <!-- Main Content goes here -->
+        {% endblock %}
+    </div>
 
     <div class="footer">
         <p>Copyright &copy; 2023 Student Career Development System</p>
