@@ -13,5 +13,17 @@ New User Creation
         {{ form.as_p }}
         <button type="submit">Submit</button>
     </form>
+
+    <script>
+        document.getElementById('id_phone').addEventListener('keyup', function(e) {
+            var value = e.target.value;
+            value = value.replace(/-/g, '');
+            if (value.length > 3 && value.length <= 6)
+                value = value.slice(0,3) + '-' + value.slice(3);
+            else if (value.length > 6)
+                value = value.slice(0,3) + '-' + value.slice(3,6) + '-' + value.slice(6);
+            e.target.value = value;
+        });
+        </script>
 {% endblock %}
 

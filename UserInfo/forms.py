@@ -60,3 +60,6 @@ class UserInformationForm(forms.ModelForm):
     class Meta:
         model = UserInformation
         fields = '__all__'
+        widgets = {
+            'tagline': forms.Textarea(attrs={'placeholder': 'Turning Bytes into Opportunities...'}),
+        }
