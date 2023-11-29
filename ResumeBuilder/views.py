@@ -41,10 +41,17 @@ def send_education(request):
         degree = request.POST['degree']
         school_start_date =request.POST['sstart']
         school_end_date = request.POST['schoolend']
+        user_id = request.POST['user']
+
+        user = get_object_or_404(UserInformation, pk=user_id)
+
     
-        eduction_entry = Education.objects.get_or_create(school_name,school_state,school_city,degree,school_start_date, school_end_date)
-        eduction_entry.save()
-    return render(request, 'ResumeBuilder/resumer_builder.html', {})
+        eduction_entry = Education.objects.get_or_create(
+            school_name = school_name,
+            degree = degree,
+            defaults={'user': user,'school_state': school_state,'school_city': school_city,'school_start_date': school_start_date, 'school_end_date': school_end_date}
+            )
+    return render(request, 'ResumeBuilder/resume_builder.html', {})
 
 
 

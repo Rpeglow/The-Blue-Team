@@ -48,7 +48,13 @@ Resume Builder
 
         <div id='education'>
             <h3>Education</h3>
-            <form method='POST'> {% csrf_token %}
+            <form method='POST' action= "{% url 'send_education' %}"> {% csrf_token %}
+                <label for="user">Select User:</label>
+                <select name="user" id="user">
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+                {% endfor %}
+                </select><br>
                 <label for="sname">School:</label><br>
                 <input type="text" id="sname" name="sname"><br>
                 <label for="sstate">State:</label><br>
