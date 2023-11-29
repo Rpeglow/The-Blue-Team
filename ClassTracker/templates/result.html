@@ -14,7 +14,7 @@ Course Details
 <h2>Related Skills</h2>
 <ul>
   {% for course_skill in course.courseskill_set.all %}
-    <li>{{ course_skill.skills_id.skill_keyword }}</li>
+    <p>{{ course_skill.skills_id.skill_keyword }}</p>
   {% empty %}
     <li>No skills available for this course yet.</li>
   {% endfor %}
