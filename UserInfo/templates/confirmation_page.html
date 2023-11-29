@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Confirmation Page
+{% endblock %}
+
+{% block content %}
+    <h1>User Created</h1>
+    {% if user %}
+        <p>Created user for {{ user.first_name }} {{ user.last_name }}. User ID is {{ user.id }}</p>
+    {% else %}
+        <p>No user information available.</p>
+    {% endif %}
+    <a href="{% url 'user_info_form' %}">Go back to form</a>
+{% endblock %}
