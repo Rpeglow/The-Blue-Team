@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 {%load static%}
 <!DOCTYPE html>
 <html>
@@ -93,3 +94,92 @@
           </div>
     </body>        
 </html>
+=======
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+FQA
+{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .faq-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px
+        }
+
+        .faq-item {
+            width: 30%;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #383838;
+            border-radius: 5px;
+        }
+
+        h3 {
+            margin-top: 0;
+        }
+
+        .contact-us {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="faq-container">
+        <div class="faq-item">
+            <h3>Question 1?</h3>
+            <p>Answer to Question 1.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Question 2?</h3>
+            <p>Answer to Question 2.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Question 3?</h3>
+            <p>Answer to Question 3.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Question 4?</h3>
+            <p>Answer to Question 4.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Question 5?</h3>
+            <p>Answer to Question 5.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Question 6?</h3>
+            <p>Answer to Question 6.</p>
+        </div>
+    </div>
+
+    <div class="contact-us">
+        <h2>Contact Us</h2>
+        <p>If you have additional questions, please feel free to contact us.</p>
+        <!-- Add your contact form or contact information here -->
+    </div>
+
+</body>
+</html>
+{% endblock %}
+>>>>>>> Stashed changes

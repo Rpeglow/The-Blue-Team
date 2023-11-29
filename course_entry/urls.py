@@ -9,5 +9,8 @@ urlpatterns = [
     path('image/<int:image_id>', image_detail, name='image_detail'),
     path('about/', views.about, name='about'),
     path('FQA/', views.FQA, name='FQA')
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 ]

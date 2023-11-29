@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 {%load static%}
 <!DOCTYPE html>
 <html>
@@ -16,3 +17,82 @@
 
     </body>        
 </html>
+=======
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+FQA
+{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .team-section,
+        .overview-section {
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="team-section">
+        <h2>Our Team</h2>
+        <p>Meet the dedicated individuals behind our project.</p>
+
+        <!-- Team Member 1 -->
+        <div>
+            <h3>Justin</h3>
+            <p>Role: </p>
+            <!-- Add more details if needed -->
+        </div>
+
+        <!-- Team Member 2 -->
+        <div>
+            <h3>Reed</h3>
+            <p>Role:</p>
+            <!-- Add more details if needed -->
+        </div>
+
+        <div>
+            <h3>Tony</h3>
+            <p>Role: </p>
+            <!-- Add more details if needed -->
+        </div>
+
+        <div>
+            <h3>Jacob</h3>
+            <p>Role:</p>
+            <!-- Add more details if needed -->
+        </div>
+        <!-- Add more team members as necessary -->
+    </div>
+
+    <div class="overview-section">
+        <h2>Project Overview</h2>
+        <p>Learn more about our exciting project.</p>
+
+        <p>This project aims to...</p>
+        <!-- Provide a brief overview of the project -->
+
+        <!-- Add more project overview details as necessary -->
+    </div>
+
+</body>
+</html>
+{% endblock %}
+>>>>>>> Stashed changes

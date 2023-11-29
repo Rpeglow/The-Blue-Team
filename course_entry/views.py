@@ -22,4 +22,8 @@ def about(request):
     return render(request, 'course_entry/about.html', {})
 
 def FQA(request):
+<<<<<<< Updated upstream
     return render(request, 'course_entry/FQA.html', {})
+=======
+    return render(request, 'course_entry/FQA.html', {})
+>>>>>>> Stashed changes
