@@ -5,6 +5,29 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import TimeoutException, NoSuchElementException, StaleElementReferenceException
+
+def find_element_with_retry(driver, by, value, timeout=20, retries=3):
+    attempts = 0
+    while attempts < retries:
+        try:
+            element = WebDriverWait(driver, timeout, poll_frequency=5, ignored_exceptions=[NoSuchElementException, StaleElementReferenceException]).until(
+                EC.presence_of_element_located((by, value))
+            )
+            return element
+        except Exception as e:
+            driver.refresh()
+
+            wait = WebDriverWait(driver, 60, poll_frequency=5, ignored_exceptions=[NoSuchElementException, StaleElementReferenceException])
+            best_match_element = wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(.,'Best Match:')]")))
+            best_match_element.click()
+            
+            print(f"Element not found. Retrying... Attempt {attempts + 1}/{retries}")
+            attempts += 1
+
+    if attempts == retries:
+        print(f"Reached maximum retries. Element not found after reloading.")
+        return None
 
 
 def scrape_course_data(class_number):
@@ -25,12 +48,15 @@ def scrape_course_data(class_number):
         search_button.click()
 
         try:
-            best_match_element = WebDriverWait(driver, 20).until(
-                EC.presence_of_element_located(
-                    (By.XPATH, "//a[contains(.,'Best Match:')]"))
-            )
 
-            print('Found best match link')
+            wait = WebDriverWait(driver, 60, poll_frequency=5, ignored_exceptions=[NoSuchElementException, StaleElementReferenceException])
+            best_match_element = wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(.,'Best Match:')]")))
+
+            if best_match_element:
+                print('Found best match link')
+            else:
+                print('No best match link found')
+                return None
 
             main_window = driver.current_window_handle
             best_match_element.click()
@@ -42,20 +68,23 @@ def scrape_course_data(class_number):
                 for window in all_windows:
                     if window != main_window:
                         driver.switch_to.window(window)
-                        course_heading_element = WebDriverWait(driver, 20).until(
-                            EC.presence_of_element_located(
-                                (By.CSS_SELECTOR, ".toplevel_popup h1"))
-                        )
-                        print('Found h1 element')
+                        course_heading_element = find_element_with_retry(driver, By.CSS_SELECTOR, ".toplevel_popup h1")
+                        if course_heading_element:
+                            print('Found h1 element')
+                        else:
+                            print('No h1 element found')
+                            return None
+                        
                         course_heading_text = course_heading_element.text.strip()
                         course_number, course_name = map(
                             str.strip, course_heading_text.split('-', 1))
 
-                        course_text_element = WebDriverWait(driver, 20).until(
-                            EC.presence_of_element_located(
-                                (By.CSS_SELECTOR, ".block_content_popup"))
-                        )
-                        print('Found popup content block')
+                        course_text_element = find_element_with_retry(driver, By.CSS_SELECTOR, ".block_content_popup")
+                        if course_text_element:
+                            print('Found popup content block')
+                        else: 
+                            print('No popup content block found')
+                            return None
 
                         course_text = course_text_element.text.strip()
 
@@ -75,21 +104,23 @@ def scrape_course_data(class_number):
             else:
                 print('Starting main window logic...')
 
-                course_heading_element = WebDriverWait(driver, 20).until(
-                    EC.presence_of_element_located(
-                        (By.XPATH, "//td/div[2]/h3"))
-                )
-                print('Found h3 element')
+                course_heading_element = find_element_with_retry(driver, By.XPATH, "//td/div[2]/h3")
+                if course_heading_element:
+                    print('Found h3 element')
+                else:
+                    print('No h3 element found')
+                    return None
 
                 course_heading_text = course_heading_element.text.strip()
                 course_number, course_name = map(
                     str.strip, course_heading_text.split('-', 1))
 
-                course_text_element = WebDriverWait(driver, 20).until(
-                    EC.presence_of_element_located(
-                        (By.XPATH, "//table[2]/tbody/tr[3]/td/table/tbody/tr/td/div[2]"))
-                )
-                print('Found content block')
+                course_text_element = find_element_with_retry(driver, By.XPATH, "//table[2]/tbody/tr[3]/td/table/tbody/tr/td/div[2]")
+                if course_text_element:
+                    print('Found content block')
+                else:
+                    print('No content block found')
+                    return None
 
                 course_text = course_text_element.text.strip()
 
