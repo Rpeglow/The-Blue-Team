@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Job List
+{% endblock %}
+
+{% block content %}
+
+    <h1>Jobs Found</h1>
+    <div class="job-list">
+        {% if jobs %}
+            <ul>
+                {% for job in jobs %}
+                    <li>
+                        <h2>{{ job.job_name }}</h2>
+                        <p>Salary Range: {{ job.salary_range }}</p>
+                        <p>Description: {{ job.description }}</p>
+                        <a href="{{ job.hyperlink }}" target="_blank">Job Link</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No jobs found based on your search criteria.</p>
+        {% endif %}
+        <p><a href="{% url 'job_search' %}">Back to Job Search</a></p>
+    </div>
+{% endblock %}

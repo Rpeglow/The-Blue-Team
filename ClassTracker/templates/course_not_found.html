@@ -1,12 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Course Not Found</title>
-</head>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Course Not Found
+{% endblock %}
+
+{% block content %}
+
 <body>
     <h1>Course Not Found</h1>
     <p>The entered course information was not found. Please try again.</p>
-    <a href="{% url 'index' %}">Return to Search</a>
+    <button onclick="window.location.href='{% url 'class_tracker' %}'">Return to Search</button>
 </body>
-</html>
+    
+{% endblock %}

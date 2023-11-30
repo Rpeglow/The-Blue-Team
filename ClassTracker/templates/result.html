@@ -1,3 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Course Details
+{% endblock %}
+
+{% block content %}
 <h2>Course Details</h2>
 <p>Course Number: {{ course.course_number }}</p>
 <p>Name: {{ course.name }}</p>
@@ -6,10 +14,11 @@
 <h2>Related Skills</h2>
 <ul>
   {% for course_skill in course.courseskill_set.all %}
-    <li>{{ course_skill.skills_id.skill_keyword }}</li>
+    <p>{{ course_skill.skills_id.skill_keyword }}</p>
   {% empty %}
     <li>No skills available for this course yet.</li>
   {% endfor %}
 </ul>
 
-<a href="{% url 'index' %}">Return to Search</a>
+<button onclick="window.location.href='{% url 'class_tracker' %}'">Return to Search</button>
+{% endblock %}

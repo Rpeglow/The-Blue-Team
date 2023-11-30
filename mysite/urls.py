@@ -15,12 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from UserInfo.views import user_info_form
 from django.urls import path, include
+from django.conf.urls import handler404, handler500
+from django.conf import settings
+from django.conf.urls.static import static
+
+handler404 = 'course_entry.views.error_404_view'
+handler500 = 'course_entry.views.error_500_view'
 
 urlpatterns = [
     path('',include('course_entry.urls')),
     path('admin/', admin.site.urls),
     path('newuser/', include('UserInfo.urls')),
-    path('classtracker/', include('ClassTracker.urls'))
- ]
+    path('classtracker/', include('ClassTracker.urls')),
+    path('resumebuilder/', include('ResumeBuilder.urls')),
+    path('jobsearch/', include('JobSearch.urls'))
+ ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

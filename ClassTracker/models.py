@@ -33,7 +33,7 @@ class UserCourse(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['user', 'course'], name='unique_user_course')
+            models.UniqueConstraint(fields=['user', 'course'], name='unique_user_course') # user and course combined has to be unique
         ]
 
     def __str__(self):
