@@ -27,11 +27,9 @@ class Education(models.Model):
     school_start_date = models.DateTimeField()
     school_end_date = models.DateTimeField()
     user = models.ForeignKey(UserInformation, on_delete=models.CASCADE)
-
-        
-        
-def __str__(self):
-    return f'{self.school_name}, {self.degree}'
+       
+    def __str__(self):
+        return f'{self.school_name}, {self.degree}'
 
 
 #class PopulateKeywords(models.Model):
