@@ -34,6 +34,9 @@
         .navbar a:hover {
             background-color: #939598;
         }
+        .navbar-right {
+            float: right;
+        }
         .footer {
             position: fixed;
             left: 0;
@@ -69,7 +72,12 @@
         <a href="{% url 'user_info_form' %}">New User Creation</a>
         <a href="{% url 'resume_builder' %}">Resume Builder</a>
         <a href="{% url 'job_search' %}">Job Search</a>
+        <div class="navbar-right">
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'FQA' %}">FQA</a>
+        </div>
     </div>
+    
 
     <div class="content">
         {% block content %}
