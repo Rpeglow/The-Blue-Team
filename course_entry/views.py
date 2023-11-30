@@ -21,8 +21,8 @@ def image_detail(request, image_id):
 def about(request):
     return render(request, 'course_entry/about.html', {})
 
-def FQA(request):
-    return render(request, 'course_entry/FQA.html', {})
+def FAQ(request):
+    return render(request, 'course_entry/FAQ.html', {})
 
 
 def error_404_view(request, exception):
