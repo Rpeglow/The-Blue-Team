@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+FQA
+{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .team-section,
+        .overview-section {
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="team-section">
+        <h2>Our Team</h2>
+        <p>Meet the dedicated individuals behind our project.</p>
+
+        
+        <div>
+            <h3>Reed</h3>
+            <p>Role: Project Manager</p>
+        </div>
+
+        <div>
+            <h3>Tony</h3>
+            <p>Role: Database and Software Engineer</p>
+        </div>
+
+        <div>
+            <h3>Justin</h3>
+            <p>Role: Software Developer</p>
+        </div>
+
+        <div>
+            <h3>Jacob</h3>
+            <p>Role: Testing Analyst</p>
+        </div>
+    </div>
+
+    <div class="overview-section">
+        <h2>Project Overview</h2>
+        <p>Learn more about our exciting project.</p>
+
+        <p>This project aims to offer student with a system that helps build a resume and take them on the road to sucess after school.</p>
+        <p>The hope is that our software will help connect you to future employers and utilize your skills in a rewarding environment.</p>
+    </div>
+
+</body>
+</html>
+{% endblock %}
+
