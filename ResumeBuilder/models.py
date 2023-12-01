@@ -13,11 +13,11 @@ class WorkHistory(models.Model):
     state = models.CharField(max_length=30)
     zip = models.CharField(max_length=15)
     phone = models.CharField(max_length=20)
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
+    start_date = models.DateField()
+    end_date = models.DateField()
 
     def __str__(self):
-        return f'{self.company_name}'
+        return self.company_name 
     
 class Education(models.Model):
     school_name = models.CharField(max_length=100)

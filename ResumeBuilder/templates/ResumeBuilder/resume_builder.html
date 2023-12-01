@@ -72,14 +72,6 @@ Resume Builder
 
         </div>
 
-        <div id='skills'>
-            <h3>Your Skills:</h3>
-            <ul>
-            {% for keyword in keywords %}
-                <li>{{keyword.skill_keyword}}</li>
-            {% endfor %}
-            </ul>
-        </div>
     </div>
 
     <a href="{% url 'generated_resume' %}">

@@ -11,10 +11,11 @@ def resume_builder(request):
     return render(request, 'ResumeBuilder/resume_builder.html', {'users': users})
 
 def generated_resume(request):
+    user = UserInformation.objects.get(pk=1)
     work_experience = WorkHistory.objects.all()
     eduction = Education.objects.all()
     user_skills = Skill.objects.all()
-    return render(request, 'ResumeBuilder/generated_resume.html', {'work_experience': work_experience, 'education': eduction, 'user_skills': user_skills})
+    return render(request, 'ResumeBuilder/generated_resume.html', {'user': user,'work_experience': work_experience, 'education': eduction, 'user_skills': user_skills})
 
 def send_work_history(request):
     if request.method == 'POST':
