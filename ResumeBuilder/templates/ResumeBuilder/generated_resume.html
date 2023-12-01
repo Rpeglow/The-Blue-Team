@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Generated Resume
+{% endblock %}
+
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static "css/GeneratedResume.css" %}}">
+    </head>
+    {% block content %}
+    <body>
+        <h3>User Info:</h3>
+           {{ user.first_name}} {{user.last_name}}
+        <h3>Work Experience:</h3>
+        {% for job in work_experience %}
+            <p>Company: {{job.company_name}}</p>
+            <p>Address: {{job.work_address}}</p>
+            <p>City: {{job.city}}</p>
+            <p>State: {{job.state}}</p>
+            <p>Zip: {{job.zip}}</p>
+            <p>Employer Phone: {{job.phone}}</p>
+            <p>Start Date: {{job.start_date}}</p>
+            <p>End Date: {{job.end_date}}</p><br>
+        {% endfor %}
+
+        <h3>Education:</h3>
+        {% for school in education %}
+            <p>University/College: {{school.school_name}}</p>
+            <p>State: {{school.school_state}}</p>
+            <p>City: {{school.school_city}}</p>
+            <p>Degree/Certification Earned: {{school.degree}}</p>
+            <p>Start Date: {{school.school_start_date}}</p>
+            <p>End Date: {{school.school_end_date}}</p><br>
+        {% endfor %}
+
+        <h3>Skills:</h3>
+        {% for skill in user_skills %}
+            <p>{{skill}}</p>
+        {% endfor %}
+
+    {% endblock %}
+
+    </body>
+</html>

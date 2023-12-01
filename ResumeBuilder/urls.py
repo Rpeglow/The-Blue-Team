@@ -3,5 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.resume_builder, name='resume_builder'),
-    path('saveworkhistory/', views.send_work_history, name='send_work_history')
+    path('send_work_history', views.send_work_history, name='send_work_history'),
+    path('send_education', views.send_education, name='send_education'),
+    path('generated_resume', views.generated_resume, name='generated_resume')
 ]

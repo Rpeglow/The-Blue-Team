@@ -21,8 +21,8 @@ class Migration(migrations.Migration):
                 ('state', models.CharField(max_length=30)),
                 ('zip', models.CharField(max_length=15)),
                 ('phone', models.CharField(max_length=20)),
-                ('start_date', models.DateTimeField()),
-                ('end_date', models.DateTimeField()),
+                ('start_date', models.DateField()),
+                ('end_date', models.DateField()),
             ],
         ),
     ]
