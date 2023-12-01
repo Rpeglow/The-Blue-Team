@@ -34,6 +34,7 @@ def generated_resume(request):
     return render(request, 'ResumeBuilder/generated_resume.html', {'user': user,'work_experience': work_experience, 'education': eduction, 'user_skills': user_skills})
 
 def send_work_history(request):
+    users = UserInformation.objects.all()
     if request.method == 'POST':
         company_name = request.POST['cname']
         work_address = request.POST['cadd']
@@ -55,9 +56,10 @@ def send_work_history(request):
         company_name = company_name,
         defaults={'user': user, 'work_address': work_address, 'city': city, 'state': state, 'zip': zip, 'phone': phone, 'start_date': start_date, 'end_date': end_date}
         )
-    return render(request, 'ResumeBuilder/resume_builder.html', {})
+    return render(request, 'ResumeBuilder/resume_builder.html', {'users': users})
 
 def send_education(request):
+    users = UserInformation.objects.all()
     if request.method == 'POST':
         school_name =request.POST['sname']
         school_state = request.POST['sstate']
@@ -76,7 +78,7 @@ def send_education(request):
             degree = degree,
             defaults={'user': user,'school_state': school_state,'school_city': school_city,'school_start_date': school_start_date, 'school_end_date': school_end_date}
             )
-    return render(request, 'ResumeBuilder/resume_builder.html', {})
+    return render(request, 'ResumeBuilder/resume_builder.html', {'users': users})
 
 
 
