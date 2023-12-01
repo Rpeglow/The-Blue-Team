@@ -3,7 +3,7 @@ from django.db import models
 from django.utils import timezone
 from UserInfo.models import UserInformation
 from ClassTracker.models import Course
-from ClassTracker.models import Skill
+from ClassTracker.models import Skill, CourseSkill, UserCourse
 
 class WorkHistory(models.Model):
     user = models.ForeignKey(UserInformation, on_delete=models.CASCADE)

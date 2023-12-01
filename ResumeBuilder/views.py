@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Skill
+from .models import Skill, CourseSkill, UserCourse
 from django.http import HttpResponse
 from .models import WorkHistory
 from .models import Education
 from .models import UserInformation
+
+
 
 
 def resume_builder(request):
@@ -11,10 +13,20 @@ def resume_builder(request):
     return render(request, 'ResumeBuilder/resume_builder.html', {'users': users})
 
 def generated_resume(request):
-    user = UserInformation.objects.get(pk=1)
-    work_experience = WorkHistory.objects.all()
-    eduction = Education.objects.all()
-    user_skills = Skill.objects.all()
+    user = UserInformation.objects.get(pk=request.user.id)
+    work_experience = WorkHistory.objects.filter(user=user)
+    eduction = Education.objects.filter(user=user)
+    # 
+    user_courses = UserCourse.objects.filter(user=user)
+        
+    user_skills = []
+
+    for user_course in user_courses:
+        course_skills = CourseSkill.objects.filter(course_number=user_course.course)
+        for course_skill in course_skills:
+            user_skills.append(course_skill.skills_id.skill_keyword)
+
+
     return render(request, 'ResumeBuilder/generated_resume.html', {'user': user,'work_experience': work_experience, 'education': eduction, 'user_skills': user_skills})
 
 def send_work_history(request):

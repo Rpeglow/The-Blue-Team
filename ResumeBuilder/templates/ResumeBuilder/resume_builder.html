@@ -13,18 +13,31 @@ Resume Builder
     </head>
 
     <body>
+        
         <h1>Welcome to the Resume Builder Portion!</h1>
         <h2>Take your time and develop a working portfolio</h2>
-        
+
+        <!-- set global for whole page -->
+        <!-- <label for="user">Select User:</label>
+                <select name="user" id="user">
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+                {% endfor %} -->
+
     <div class='resumeFields'>
         <div id='workHistory'>
             <h3>Work History</h3>
+
+            <!-- get user first, two forms -->
             <form method="POST" action="{% url 'send_work_history' %}">{% csrf_token %}
+
             <label for="user">Select User:</label>
             <select name="user" id="user">
+
             {% for user in users %}
                 <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
             {% endfor %}
+            
             </select><br>
                 <label for="cname">Company:</label><br>
                 <input type="text" id="cname" name="cname"><br>
@@ -73,7 +86,7 @@ Resume Builder
         </div>
 
     </div>
-
+<!--  -->
     <a href="{% url 'generated_resume' %}">
     <button type="button">Generated Resume</button>
 </a>

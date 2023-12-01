@@ -13,7 +13,17 @@ Generated Resume
     {% block content %}
     <body>
         <h3>User Info:</h3>
+
+               
            {{ user.first_name}} {{user.last_name}}
+              <p>Address: {{user.address}}</p>
+                <p>City: {{user.city}}</p>
+                <p>State: {{user.state}}</p>
+                <p>Zip: {{user.zip}}</p>
+                <p>Phone: {{user.phone}}</p>
+                <p>Email: {{user.email}}</p>
+                
+                
         <h3>Work Experience:</h3>
         {% for job in work_experience %}
             <p>Company: {{job.company_name}}</p>
