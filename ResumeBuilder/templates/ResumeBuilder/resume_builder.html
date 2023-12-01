@@ -18,11 +18,12 @@ Resume Builder
         <h2>Take your time and develop a working portfolio</h2>
 
         <!-- set global for whole page -->
-        <!-- <label for="user">Select User:</label>
-                <select name="user" id="user">
+        <label for="global_user">Select User:</label>
+                <select name="global_user" id="global_user" >
+                    <option value="" selected disabled>Select A User</option>
                 {% for user in users %}
                     <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
-                {% endfor %} -->
+                {% endfor %} </select><br>
 
     <div class='resumeFields'>
         <div id='workHistory'>
@@ -31,14 +32,16 @@ Resume Builder
             <!-- get user first, two forms -->
             <form method="POST" action="{% url 'send_work_history' %}">{% csrf_token %}
 
-            <label for="user">Select User:</label>
-            <select name="user" id="user">
+            <!-- <label for="user">Select User:</label>
+            <select name="user" id="user"> -->
 
-            {% for user in users %}
+            <!-- {% for user in users %}
                 <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
-            {% endfor %}
+            {% endfor %} -->
             
-            </select><br>
+            <!-- </select><br> -->
+            <input type="hidden" name="cuser" id="cuser" >
+
                 <label for="cname">Company:</label><br>
                 <input type="text" id="cname" name="cname"><br>
                 <label for="cadd">Address:</label><br>
@@ -61,13 +64,10 @@ Resume Builder
 
         <div id='education'>
             <h3>Education</h3>
+
             <form method='POST' action= "{% url 'send_education' %}"> {% csrf_token %}
-                <label for="user">Select User:</label>
-                <select name="user" id="user">
-                {% for user in users %}
-                    <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
-                {% endfor %}
-                </select><br>
+                <input type="hidden" name="suser" id="suser" >
+
                 <label for="sname">School:</label><br>
                 <input type="text" id="sname" name="sname"><br>
                 <label for="sstate">State:</label><br>
@@ -87,7 +87,30 @@ Resume Builder
 
     </div>
 <!--  -->
-    <a href="{% url 'generated_resume' %}">
-    <button type="button">Generated Resume</button>
-</a>
+<form method="POST" action="{% url 'generated_resume' %}">{% csrf_token %}
+    <input type="hidden" name="user" id="user" >
+    <input type="submit" id="submitThree" value="Generate Resume">
+</form>
+    <!-- <a href="{% url 'generated_resume' %}">
+         <button type="button">Generated Resume</button> -->
+
+<!-- </a> -->
+<script>
+    document.getElementById('global_user').addEventListener('change', function() {
+        var global_user = this.value;
+        document.getElementById('user').value = global_user;
+    });
+    document.getElementById('global_user').addEventListener('change', function() {
+        var global_user = this.value;
+        document.getElementById('cuser').value = global_user;
+    });
+    document.getElementById('global_user').addEventListener('change', function() {
+        var global_user = this.value;
+        document.getElementById('suser').value = global_user;
+    });
+    
+
+
+</script>
+
 {% endblock %}

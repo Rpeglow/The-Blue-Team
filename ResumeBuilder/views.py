@@ -13,10 +13,14 @@ def resume_builder(request):
     return render(request, 'ResumeBuilder/resume_builder.html', {'users': users})
 
 def generated_resume(request):
-    user = UserInformation.objects.get(pk=request.user.id)
+    if request.method == 'POST':
+        user_id = request.POST['user']
+
+    user = get_object_or_404(UserInformation, pk=user_id)
+
+   
     work_experience = WorkHistory.objects.filter(user=user)
     eduction = Education.objects.filter(user=user)
-    # 
     user_courses = UserCourse.objects.filter(user=user)
         
     user_skills = []
@@ -39,7 +43,8 @@ def send_work_history(request):
         phone = request.POST['cphone']
         start_date = request.POST['cstart']
         end_date = request.POST['cend']
-        user_id = request.POST['user']
+        # c user
+        user_id = request.POST['cuser']
         
         user = get_object_or_404(UserInformation, pk=user_id)
 
@@ -60,7 +65,8 @@ def send_education(request):
         degree = request.POST['degree']
         school_start_date =request.POST['sstart']
         school_end_date = request.POST['schoolend']
-        user_id = request.POST['user']
+        # s user
+        user_id = request.POST['suser']
 
         user = get_object_or_404(UserInformation, pk=user_id)
 
