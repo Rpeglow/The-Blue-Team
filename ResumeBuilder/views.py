@@ -10,6 +10,12 @@ def resume_builder(request):
     users = UserInformation.objects.all()
     return render(request, 'ResumeBuilder/resume_builder.html', {'users': users})
 
+def generated_resume(request):
+    work_experience = WorkHistory.objects.all()
+    eduction = Education.objects.all()
+    user_skills = Skill.objects.all()
+    return render(request, 'ResumeBuilder/generated_resume.html', {'work_experience': work_experience, 'education': eduction, 'user_skills': user_skills})
+
 def send_work_history(request):
     if request.method == 'POST':
         company_name = request.POST['cname']
