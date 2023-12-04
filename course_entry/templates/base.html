@@ -34,6 +34,9 @@
         .navbar a:hover {
             background-color: #939598;
         }
+        .navbar-left {
+            float: left;
+        }
         .navbar-right {
             float: right;
         }
@@ -75,14 +78,16 @@
 <body>
     <!-- Navigation bar -->
     <div class="navbar">
+        <div class="navbar-left">
         <a href="{% url 'image_page' %}">Home</a>
         <a href="{% url 'class_tracker' %}">Course & Skill Search</a>
         <a href="{% url 'user_info_form' %}">New User Creation</a>
         <a href="{% url 'resume_builder' %}">Resume Builder</a>
         <a href="{% url 'job_search' %}">Job Search</a>
+        </div>
         <div class="navbar-right">
-            <a href="{% url 'about' %}">About</a>
-            <a href="{% url 'FAQ' %}">FAQ</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'FAQ' %}">FAQ</a>
         </div>
     </div>
     
