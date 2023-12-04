@@ -8,48 +8,59 @@ Generated Resume
 
 <html>
     <head>
-        <link rel="stylesheet" href="{% static "css/GeneratedResume.css" %}}">
+       
+     
     </head>
+   
     {% block content %}
     <body>
-        <h3>User Info:</h3>
+        <div class="container">
+            <div class="user-info">
+                <h3>User Info:</h3>
+                <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+                <p><strong>Address:</strong> {{ user.address }}, {{ user.city }}, {{ user.state }}, {{ user.zip }}</p>
+                <p><strong>Phone:</strong> {{ user.phone }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+            </div>
 
-               
-           {{ user.first_name}} {{user.last_name}}
-              <p>Address: {{user.address}}</p>
-                <p>City: {{user.city}}</p>
-                <p>State: {{user.state}}</p>
-                <p>Zip: {{user.zip}}</p>
-                <p>Phone: {{user.phone}}</p>
-                <p>Email: {{user.email}}</p>
-                
-                
-        <h3>Work Experience:</h3>
-        {% for job in work_experience %}
-            <p>Company: {{job.company_name}}</p>
-            <p>Address: {{job.work_address}}</p>
-            <p>City: {{job.city}}</p>
-            <p>State: {{job.state}}</p>
-            <p>Zip: {{job.zip}}</p>
-            <p>Employer Phone: {{job.phone}}</p>
-            <p>Start Date: {{job.start_date}}</p>
-            <p>End Date: {{job.end_date}}</p><br>
-        {% endfor %}
+            <div class="work-experience">
+                <h3>Work Experience:</h3>
+                {% for job in work_experience %}
+                    <div class="job">
+                        <p><strong>Company:</strong> {{ job.company_name }}</p>
+                        <p><strong>Address:</strong> {{ job.work_address }}, {{ job.city }}, {{ job.state }}, {{ job.zip }}</p>
+                        <p><strong>Employer Phone:</strong> {{ job.phone }}</p>
+                        <p><strong>Start Date:</strong> {{ job.start_date }}</p>
+                        <p><strong>End Date:</strong> {{ job.end_date }}</p>
+                        <br>
+                    </div>
+                {% endfor %}
+            </div>
 
-        <h3>Education:</h3>
-        {% for school in education %}
-            <p>University/College: {{school.school_name}}</p>
-            <p>State: {{school.school_state}}</p>
-            <p>City: {{school.school_city}}</p>
-            <p>Degree/Certification Earned: {{school.degree}}</p>
-            <p>Start Date: {{school.school_start_date}}</p>
-            <p>End Date: {{school.school_end_date}}</p><br>
-        {% endfor %}
+            <div class="education">
+                <h3>Education:</h3>
+                {% for school in education %}
+                    <div class="school">
+                        <p><strong>University/College:</strong> {{ school.school_name }}</p>
+                        <p><strong>Location:</strong> {{ school.school_city }}, {{ school.school_state }}</p>
+                        <p><strong>Degree/Certification Earned:</strong> {{ school.degree }}</p>
+                        <p><strong>Start Date:</strong> {{ school.school_start_date }}</p>
+                        <p><strong>End Date:</strong> {{ school.school_end_date }}</p>
+                        <br>
+                    </div>
+                {% endfor %}
+            </div>
 
-        <h3>Skills:</h3>
-        {% for skill in user_skills %}
-            <p>{{skill}}</p>
-        {% endfor %}
+            <div class="skills">
+                <h3>Skills:</h3>
+                <ul>
+                    {% for skill in user_skills %}
+                        <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        
 
     {% endblock %}
 

@@ -19,99 +19,131 @@ Resume Builder
 
         <!-- set global for whole page -->
         <label for="global_user">Select User:</label>
-                <select name="global_user" id="global_user" >
-                    <option value="" selected disabled>Select A User</option>
-                {% for user in users %}
-                    <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
-                {% endfor %} </select><br>
-
-    <div class='resumeFields'>
-        <div id='workHistory'>
-            <h3>Work History</h3>
-            
-
-            <!-- get user first, two forms -->
-            <form method="POST" action="{% url 'send_work_history' %}">{% csrf_token %}
-
-            <!-- <label for="user">Select User:</label>
-            <select name="user" id="user"> -->
-
-            <!-- {% for user in users %}
+        <select name="global_user" id="global_user" >
+            <option value="" selected disabled>Select A User</option>
+            {% for user in users %}
                 <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
-            {% endfor %} -->
-            
-            <!-- </select><br> -->
-            <input type="hidden" name="cuser" id="cuser" >
+            {% endfor %}
+        </select><br>
 
-                <label for="cname">Company:</label><br>
-                <input type="text" id="cname" name="cname"><br>
-                <label for="cadd">Address:</label><br>
-                <input type="text" id="cadd" name="cadd"><br>
-                <label for="ccity">City:</label><br>
-                <input type="text" id="ccity" name="ccity"><br>
-                <label for="cstate">State:</label><br>
-                <input type="text" id="cstate" name="cstate"><br>
-                <label for="czip">Zip:</label><br>
-                <input type="text" id="czip" name="czip"><br>
-                <label for="cphone">Phone:</label><br>
-                <input type="tel" id="cphone" name="cphone"><br>
-                <label for="cstart">State Date:</label><br>
-                <input type="date" id="cstart" name="cstart"><br>
-                <label for="cend">End Date:</label><br>
-                <input type="date" id="cend" name="cend"><br>
-                <input type="submit" id="submitOne" value="Submit">
-            </form>
+        <div class='resumeFields'>
+            <div id='workHistory'>
+                <h3>Work History</h3>
+
+                <!-- get user first, two forms -->
+                <form id="workHistoryForm" method="POST" action="{% url 'send_work_history' %}">{% csrf_token %}
+                    <input type="hidden" name="cuser" id="cuser" >
+
+                    <label for="cname">Company:</label><br>
+                    <input type="text" id="cname" name="cname"><br>
+                    <label for="cadd">Address:</label><br>
+                    <input type="text" id="cadd" name="cadd"><br>
+                    <label for="ccity">City:</label><br>
+                    <input type="text" id="ccity" name="ccity"><br>
+                    <label for="cstate">State:</label><br>
+                    <input type="text" id="cstate" name="cstate"><br>
+                    <label for="czip">Zip:</label><br>
+                    <input type="text" id="czip" name="czip"><br>
+                    <label for="cphone">Phone:</label><br>
+                    <input type="tel" id="cphone" name="cphone"><br>
+                    <label for="cstart">Start Date:</label><br>
+                    <input type="date" id="cstart" name="cstart"><br>
+                    <label for="cend">End Date:</label><br>
+                    <input type="date" id="cend" name="cend"><br>
+                    <input type="submit" id="submitOne" value="Submit">
+                </form>
+            </div>
+
+            <div id='education'>
+                <h3>Education</h3>
+
+                <form method='POST' action= "{% url 'send_education' %}"> {% csrf_token %}
+                    <input type="hidden" name="suser" id="suser" >
+
+                    <label for="sname">School:</label><br>
+                    <input type="text" id="sname" name="sname"><br>
+                    <label for="sstate">State:</label><br>
+                    <input type="text" id="sstate" name="sstate"><br>
+                    <label for="scity">City:</label><br>
+                    <input type="text" id="scity" name="scity"><br>
+                    <label for="degree">Degree/Certification:</label><br>
+                    <input type="text" id="degree" name="degree"><br>
+                    <label for="sstart">Start Date:</label><br>
+                    <input type="date" id="sstart" name="sstart"><br>
+                    <label for="schoolend">End Date:</label><br>
+                    <input type="date" id="schoolend" name="schoolend"><br>
+                    <input type="submit" id="submitTwo" value="Submit">
+                </form>
+
+            </div>
+
         </div>
 
-        <div id='education'>
-            <h3>Education</h3>
+        <form method="POST" action="{% url 'generated_resume' %}">{% csrf_token %}
+            <input type="hidden" name="user" id="user" >
+            <input type="submit" id="submitThree" value="Generate Resume">
+        </form>
 
-            <form method='POST' action= "{% url 'send_education' %}"> {% csrf_token %}
-                <input type="hidden" name="suser" id="suser" >
+        <script>
+            document.getElementById('global_user').addEventListener('change', function() {
+                var global_user = this.value;
+                document.getElementById('user').value = global_user;
+                document.getElementById('cuser').value = global_user;
+                document.getElementById('suser').value = global_user;
+            });
 
-                <label for="sname">School:</label><br>
-                <input type="text" id="sname" name="sname"><br>
-                <label for="sstate">State:</label><br>
-                <input type="text" id="sstate" name="sstate"><br>
-                <label for="scity">City:</label><br>
-                <input type="text" id="scity" name="scity"><br>
-                <label for="degree">Degree/Certification:</label><br>
-                <input type="text" id="degree" name="degree"><br>
-                <label for="sstart">Start Date:</label><br>
-                <input type="date" id="sstart" name="sstart"><br>
-                <label for="schoolend">End Date:</label><br>
-                <input type="date" id="schoolend" name="schoolend"><br>
-                <input type="submit" id="submitTwo" value="Submit">
-            </form>
+            // user must be selected before submitting forms
+            window.onload = function() {
+            // Hide the forms initially
+            document.getElementById('workHistory').style.display = 'none';
+            document.getElementById('education').style.display = 'none';
 
-        </div>
+            // Show the forms when a user is selected
+            document.getElementById('global_user').addEventListener('change', function() {
+                if (this.value) {
+                    document.getElementById('workHistory').style.display = 'block';
+                    document.getElementById('education').style.display = 'block';
+                } else {
+                    document.getElementById('workHistory').style.display = 'none';
+                    document.getElementById('education').style.display = 'none';
+                        }
+                    });
+                };
 
-    </div>
-<!--  -->
-<form method="POST" action="{% url 'generated_resume' %}">{% csrf_token %}
-    <input type="hidden" name="user" id="user" >
-    <input type="submit" id="submitThree" value="Generate Resume">
-</form>
-    <!-- <a href="{% url 'generated_resume' %}">
-         <button type="button">Generated Resume</button> -->
+            // form validation for work history
+            document.getElementById('workHistoryForm').addEventListener('submit', function(event) {
+                var cname = document.getElementById('cname').value;
+                var cadd = document.getElementById('cadd').value;
+                var ccity = document.getElementById('ccity').value;
+                var cstate = document.getElementById('cstate').value;
+                var czip = document.getElementById('czip').value;
+                var cphone = document.getElementById('cphone').value;
+                var cstart = document.getElementById('cstart').value;
+                var cend = document.getElementById('cend').value;
 
-<!-- </a> -->
-<script>
-    document.getElementById('global_user').addEventListener('change', function() {
-        var global_user = this.value;
-        document.getElementById('user').value = global_user;
-    });
-    document.getElementById('global_user').addEventListener('change', function() {
-        var global_user = this.value;
-        document.getElementById('cuser').value = global_user;
-    });
-    document.getElementById('global_user').addEventListener('change', function() {
-        var global_user = this.value;
-        document.getElementById('suser').value = global_user;
-    });
-    
+                if (!cname || !cadd || !ccity || !cstate || !czip || !cphone || !cstart || !cend) {
+                    alert('All fields are required.');
+                    event.preventDefault();  // prevent form from submitting
+                }
+            });
 
+            // form validation for education
+            document.getElementById('education').querySelector('form').addEventListener('submit', function(event) {
+                var sname = document.getElementById('sname').value;
+                var sstate = document.getElementById('sstate').value;
+                var scity = document.getElementById('scity').value;
+                var degree = document.getElementById('degree').value;
+                var sstart = document.getElementById('sstart').value;
+                var schoolend = document.getElementById('schoolend').value;
 
-</script>
+                if (!sname || !sstate || !scity || !degree || !sstart || !schoolend) {
+                    alert('All fields are required.');
+                    event.preventDefault();  // prevent form from submitting
+                }
+            });
+        </script>
+
+    </body>
+</html>
 
 {% endblock %}
