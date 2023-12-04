@@ -26,7 +26,10 @@ Resume Builder
             {% endfor %}
         </select><br>
 
+       
+
         <div class='resumeFields'>
+          
             <div id='workHistory'>
                 <h3>Work History</h3>
 
@@ -76,13 +79,15 @@ Resume Builder
                 </form>
 
             </div>
+        <form method="POST" action="{% url 'generated_resume' %}">
+            {% csrf_token %}
+            <input type="hidden" name="user" id="user">
+            <button type="submit" id="submitThree">Generate Resume</button>
+        </form>
 
         </div>
 
-        <form method="POST" action="{% url 'generated_resume' %}">{% csrf_token %}
-            <input type="hidden" name="user" id="user" >
-            <input type="submit" id="submitThree" value="Generate Resume">
-        </form>
+       
 
         <script>
             document.getElementById('global_user').addEventListener('change', function() {
@@ -97,19 +102,23 @@ Resume Builder
             // Hide the forms initially
             document.getElementById('workHistory').style.display = 'none';
             document.getElementById('education').style.display = 'none';
+            document.getElementById('submitThree').style.display = 'none';
 
             // Show the forms when a user is selected
             document.getElementById('global_user').addEventListener('change', function() {
                 if (this.value) {
                     document.getElementById('workHistory').style.display = 'block';
                     document.getElementById('education').style.display = 'block';
+                    document.getElementById('submitThree').style.display = 'block';
                 } else {
                     document.getElementById('workHistory').style.display = 'none';
                     document.getElementById('education').style.display = 'none';
+                    document.getElementById('submitThree').style.display = 'none';
                         }
                     });
                 };
-
+            //form validation for global user
+             
             // form validation for work history
             document.getElementById('workHistoryForm').addEventListener('submit', function(event) {
                 var cname = document.getElementById('cname').value;
