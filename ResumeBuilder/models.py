@@ -3,7 +3,7 @@ from django.db import models
 from django.utils import timezone
 from UserInfo.models import UserInformation
 from ClassTracker.models import Course
-from ClassTracker.models import Skill
+from ClassTracker.models import Skill, CourseSkill, UserCourse
 
 class WorkHistory(models.Model):
     user = models.ForeignKey(UserInformation, on_delete=models.CASCADE)
@@ -13,11 +13,11 @@ class WorkHistory(models.Model):
     state = models.CharField(max_length=30)
     zip = models.CharField(max_length=15)
     phone = models.CharField(max_length=20)
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
+    start_date = models.DateField()
+    end_date = models.DateField()
 
     def __str__(self):
-        return f'{self.company_name}'
+        return self.company_name 
     
 class Education(models.Model):
     school_name = models.CharField(max_length=100)
@@ -27,12 +27,11 @@ class Education(models.Model):
     school_start_date = models.DateTimeField()
     school_end_date = models.DateTimeField()
     user = models.ForeignKey(UserInformation, on_delete=models.CASCADE)
-        
-        
-def __str__(self):
-    return f'{self.school_name}, {self.degree}'
+       
+    def __str__(self):
+        return f'{self.school_name}, {self.degree}'
 
 
-class PopulateKeywords(models.Model):
-    skill_keyword = models.ForeignKey(Skill, on_delete=models.CASCADE)
+#class PopulateKeywords(models.Model):
+#   skill_keyword = models.ForeignKey(Skill, on_delete=models.CASCADE)
         
