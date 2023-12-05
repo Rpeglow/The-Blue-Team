@@ -9,7 +9,7 @@ Resume Builder
 
 <html>
     <head>
-        <link rel="stylesheet" href="{% static 'css/ResumeBuilder.css' %}">
+        <link rel="stylesheet" href="{% static 'CSS/ResumeBuilder.css' %}">
     </head>
 
     <body>
@@ -20,21 +20,24 @@ Resume Builder
             <!-- set global for whole page -->
             <div id="form-wrapper">
 
-            <label for="global_user">Select User:</label>
-            <select name="global_user" id="global_user" >
-                <option value="" selected disabled>Select A User</option>
-                {% for user in users %}
-                    <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
-                {% endfor %}
-            </select>
-
-            <label for="global_category">Select Category:</label>
-            <select name="global_category" id="global_category">
-                <option value="" selected disabled>Select A Category</option>
-                    <option value="category_work">Enter Work History</option>
-                    <option value="category_education">Enter Education</option>           
-                    <option value="category_resume">Generate Resume</option>         
-            </select>
+            <p>
+                <label for="global_user">Select User:</label>
+                <select name="global_user" id="global_user" >
+                    <option value="" selected disabled>Select A User</option>
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+            <p>
+                <label for="global_category">Select Category:</label>
+                <select name="global_category" id="global_category">
+                    <option value="" selected disabled>Select A Category</option>
+                        <option value="category_work">Enter Work History</option>
+                        <option value="category_education">Enter Education</option>
+                        <option value="category_resume">Generate Resume</option>
+                </select>
+            </p>
             </div><br>
 
         
@@ -48,22 +51,90 @@ Resume Builder
                         <form id="workHistoryForm" method="POST" action="{% url 'send_work_history' %}">{% csrf_token %}
                             <input type="hidden" name="cuser" id="cuser" >
 
-                            <label for="cname">Company:</label><br>
-                            <input type="text" id="cname" name="cname"><br>
-                            <label for="cadd">Address:</label><br>
-                            <input type="text" id="cadd" name="cadd"><br>
-                            <label for="ccity">City:</label><br>
-                            <input type="text" id="ccity" name="ccity"><br>
-                            <label for="cstate">State:</label><br>
-                            <input type="text" id="cstate" name="cstate"><br>
-                            <label for="czip">Zip:</label><br>
-                            <input type="text" id="czip" name="czip"><br>
-                            <label for="cphone">Phone:</label><br>
-                            <input type="tel" id="cphone" name="cphone"><br>
-                            <label for="cstart">Start Date:</label><br>
-                            <input type="date" id="cstart" name="cstart"><br>
-                            <label for="cend">End Date:</label><br>
-                            <input type="date" id="cend" name="cend"><br>
+                            <p>
+                                <label for="cname">Company:</label><br>
+                                <input type="text" id="cname" name="cname">
+                            </p>
+                            <p>
+                                <label for="cadd">Address:</label><br>
+                                <input type="text" id="cadd" name="cadd">
+                            </p>
+                            <p>
+                                <label for="ccity">City:</label><br>
+                                <input type="text" id="ccity" name="ccity">
+                            </p>
+                            <p>
+                                <label for="cstate">State:</label><br>
+                                <select id="cstate" name="cstate">
+                                    <option value="" selected disabled>Select State</option>
+                                    <option value="AL">Alabama</option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="AZ">Arizona</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="CA">California</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="HI">Hawaii</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="IA">Iowa</option>
+                                    <option value="KS">Kansas</option>
+                                    <option value="KY">Kentucky</option>
+                                    <option value="LA">Louisiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    <option value="MA">Massachusetts</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="MN">Minnesota</option>
+                                    <option value="MS">Mississippi</option>
+                                    <option value="MO">Missouri</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="NH">New Hampshire</option>
+                                    <option value="NJ">New Jersey</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="NY">New York</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="OK">Oklahoma</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="RI">Rhode Island</option>
+                                    <option value="SC">South Carolina</option>
+                                    <option value="SD">South Dakota</option>
+                                    <option value="TN">Tennessee</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="VT">Vermont</option>
+                                    <option value="VA">Virginia</option>
+                                    <option value="WA">Washington</option>
+                                    <option value="WV">West Virginia</option>
+                                    <option value="WI">Wisconsin</option>
+                                    <option value="WY">Wyoming</option>
+                                </select>
+                            </p>
+                            <p>
+                                <label for="czip">Zip:</label>
+                                <input type="text" id="czip" name="czip">
+                            </p>
+                            <p>
+                                <label for="cphone">Phone:</label><br>
+                                <input type="tel" id="cphone" name="cphone">
+                            </p>
+                            <p>
+                                <label for="cstart">Start Date:</label>
+                                <input type="date" id="cstart" name="cstart">
+                            </p>
+                            <p>
+                                <label for="cend">End Date:</label>
+                                <input type="date" id="cend" name="cend">
+                            </p>
                             <input type="submit" id="submitOne" value="Submit">
                         </form>
                     </div>
@@ -76,18 +147,82 @@ Resume Builder
                         <form method='POST' action= "{% url 'send_education' %}"> {% csrf_token %}
                             <input type="hidden" name="suser" id="suser" >
 
-                            <label for="sname">School:</label><br>
-                            <input type="text" id="sname" name="sname"><br>
-                            <label for="sstate">State:</label><br>
-                            <input type="text" id="sstate" name="sstate"><br>
-                            <label for="scity">City:</label><br>
-                            <input type="text" id="scity" name="scity"><br>
-                            <label for="degree">Degree/Certification:</label><br>
-                            <input type="text" id="degree" name="degree"><br>
-                            <label for="sstart">Start Date:</label><br>
-                            <input type="date" id="sstart" name="sstart"><br>
-                            <label for="schoolend">End Date:</label><br>
-                            <input type="date" id="schoolend" name="schoolend"><br>
+                            <p>
+                                <label for="sname">School:</label><br>
+                                <input type="text" id="sname" name="sname"><br>
+                            </p>
+                            <p>
+                                <label for="scity">City:</label><br>
+                                <input type="text" id="scity" name="scity"><br>
+                            </p>
+                            <p>
+                                <label for="sstate">State:</label><br>
+                                <select id="sstate" name="sstate">
+                                    <option value="" selected disabled>Select State</option>
+                                    <option value="AL">Alabama</option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="AZ">Arizona</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="CA">California</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="HI">Hawaii</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="IA">Iowa</option>
+                                    <option value="KS">Kansas</option>
+                                    <option value="KY">Kentucky</option>
+                                    <option value="LA">Louisiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    <option value="MA">Massachusetts</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="MN">Minnesota</option>
+                                    <option value="MS">Mississippi</option>
+                                    <option value="MO">Missouri</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="NH">New Hampshire</option>
+                                    <option value="NJ">New Jersey</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="NY">New York</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="OK">Oklahoma</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="RI">Rhode Island</option>
+                                    <option value="SC">South Carolina</option>
+                                    <option value="SD">South Dakota</option>
+                                    <option value="TN">Tennessee</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="VT">Vermont</option>
+                                    <option value="VA">Virginia</option>
+                                    <option value="WA">Washington</option>
+                                    <option value="WV">West Virginia</option>
+                                    <option value="WI">Wisconsin</option>
+                                    <option value="WY">Wyoming</option>
+                                </select><br>
+                            </p>
+                            <p>
+                                <label for="degree">Degree/Certification:</label><br>
+                                <input type="text" id="degree" name="degree"><br>
+                            </p>
+                            <p>
+                                <label for="sstart">Start Date:</label><br>
+                                <input type="date" id="sstart" name="sstart"><br>
+                            </p>
+                            <p>
+                                <label for="schoolend">End Date:</label><br>
+                                <input type="date" id="schoolend" name="schoolend"><br>
+                            </p>
                             <input type="submit" id="submitTwo" value="Submit">
                         </form>
                     </div>
