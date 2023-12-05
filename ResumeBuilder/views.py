@@ -76,7 +76,8 @@ def send_education(request):
         eduction_entry = Education.objects.get_or_create(
             school_name = school_name,
             degree = degree,
-            defaults={'user': user,'school_state': school_state,'school_city': school_city,'school_start_date': school_start_date, 'school_end_date': school_end_date}
+            user = user,
+            defaults={'school_state': school_state,'school_city': school_city,'school_start_date': school_start_date, 'school_end_date': school_end_date}
             )
     return render(request, 'ResumeBuilder/resume_builder.html', {'users': users})
 
