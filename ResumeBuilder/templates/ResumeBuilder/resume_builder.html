@@ -29,10 +29,11 @@ Resume Builder
             </select>
 
             <label for="global_category">Select Category:</label>
-            <select name="global_category" id="global_category" onchange="switchCategories">
+            <select name="global_category" id="global_category">
                 <option value="" selected disabled>Select A Category</option>
-                    <option value="category_work">Work History</option>
-                    <option value="category_education">Education</option>                    
+                    <option value="category_work">Enter Work History</option>
+                    <option value="category_education">Enter Education</option>           
+                    <option value="category_resume">Generate Resume</option>         
             </select>
             </div><br>
 
@@ -92,12 +93,15 @@ Resume Builder
                     </div>
                 </div>
 
+                <div id='generate_resume'>
+
+                <h3>Generate Resume</h3>
                 <form method="POST" action="{% url 'generated_resume' %}">
                     {% csrf_token %}
                     <input type="hidden" name="user" id="user">
                     <button type="submit" id="submitThree">Generate Resume</button>
                 </form>
-
+                </div>
             </div>
         </div>
        
@@ -116,22 +120,26 @@ Resume Builder
             // Hide the forms initially
             document.getElementById('workHistory').style.display = 'none';
             document.getElementById('education').style.display = 'none';
-            document.getElementById('submitThree').style.display = 'none';
+            document.getElementById('generate_resume').style.display = 'none';
 
             // Show the forms when a user is selected
             document.getElementById('global_category').addEventListener('change', function() {
                 if (this.value == "category_work") {
                     document.getElementById('workHistory').style.display = 'block';
                     document.getElementById('education').style.display = 'none';
-                    document.getElementById('submitThree').style.display = 'block';
+                    document.getElementById('generate_resume').style.display = 'none';
                 } else if(this.value == "category_education"){
                     document.getElementById('workHistory').style.display = 'none';
                     document.getElementById('education').style.display = 'block';
-                    document.getElementById('submitThree').style.display = 'block';
+                    document.getElementById('generate_resume').style.display = 'none';
+                } else if(this.value == "category_resume"){
+                    document.getElementById('workHistory').style.display = 'none';
+                    document.getElementById('education').style.display = 'none';
+                    document.getElementById('generate_resume').style.display = 'block';
                         } else {
                             document.getElementById('workHistory').style.display = 'none';
                             document.getElementById('education').style.display = 'none';
-                            document.getElementById('submitThree').style.display = 'none';
+                            document.getElementById('generate_resume').style.display = 'none';
                         }
                     });
                 };
