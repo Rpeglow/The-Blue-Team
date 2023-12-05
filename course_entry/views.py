@@ -18,6 +18,13 @@ def image_detail(request, image_id):
     
     return redirect(app_url)
 
+def about(request):
+    return render(request, 'course_entry/about.html', {})
+
+def FAQ(request):
+    return render(request, 'course_entry/FAQ.html', {})
+
+
 def error_404_view(request, exception):
     return render(request, '404.html', status=404)
 
