@@ -37,20 +37,51 @@ Job Search
         <h2>Welcome to the Job Search App!</h2>
         <p>Please select a user then click the button below to load previous jobs or search for new jobs by selecting skills in the list that will appear below.</p>
         <div id="form-wrapper">
-            <form action="{% url 'confirm_job_search' %}" method="post">
-                {% csrf_token %}
-                <label for="user_id">Select User:</label>
-                <select name="user_id" id="user_id" onchange="displaySkills(this)">
-                    <option value="">Select a user</option>
-                    {% for user in users %}
-                        <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
-                    {% endfor %}
-                </select>
-                <button onclick="window.location.href='{% url 'load_previous_jobs' %}'">Load Previous Jobs</button>
-                <div id="skills"></div>
-                <button type="submit">Search Jobs</button>
-            </form>
+            <label for="global_user">Select User:</label>
+            <select name="global_user" id="global_user" onchange="displaySkills(this)">
+                <option value="" selected disabled>Select A User</option>
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+                {% endfor %}
+            </select><br>
+        </div>
+
+        <div id="form-wrapper">
+            <div id="job_search">
+                <form action="{% url 'load_previous_jobs' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="p_user_id" id="p_user_id">
+                    <button type="submit">Load Previous Jobs</button>
+                </form><br><br>
+
+                <form action="{% url 'confirm_job_search' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="user_id" id="user_id" >
+                    <div id="skills"></div>
+                    <button type="submit">Search Jobs</button>
+                </form>
+            </div>
         </div>
     </div>
 </body>
+
+<script>
+    document.getElementById('global_user').addEventListener('change', function() {
+        var global_user = this.value;
+        document.getElementById('user_id').value = global_user;
+        document.getElementById('p_user_id').value = global_user;
+    });
+
+    window.onload = function() {
+    document.getElementById('job_search').style.display = 'none';
+
+    document.getElementById('global_user').addEventListener('change', function() {
+        if (this.value) {
+            document.getElementById('job_search').style.display = 'block';
+        } else {
+            document.getElementById('job_search').style.display = 'none';
+                }
+            });
+        };    
+</script>
 {% endblock %}

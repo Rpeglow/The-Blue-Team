@@ -50,7 +50,21 @@ def confirm_job_search(request):
 
     return render(request, 'no_jobs_found.html')
 
-def load_previous_jobs(request):
-    jobs = Job.objects.all()
 
-    return render(request, 'job_list.html', {'jobs': jobs})
+def load_previous_jobs(request):
+    if request.method == 'POST':
+        user_id = request.POST.get('p_user_id')
+
+        if user_id:
+            user = UserInformation.objects.get(pk=user_id)  
+    
+            jobs = Job.objects.filter(user=user)
+            
+            return render(request, 'job_list.html', {'jobs': jobs})
+    
+""" def load_previous_jobs(request, p_user_id):
+    user = UserInformation.objects.get(pk=p_user_id)
+    
+    jobs = Job.objects.filter(user=user)
+    
+    return render(request, 'job_list.html', {'jobs': jobs}) """

@@ -23,21 +23,21 @@
         <div id="form-wrapper">
             <form method="post" action="{% url 'search_course' %}" onsubmit="return validateForm()">
                 {% csrf_token %}
-                <label for="user">Select User:</label>
+                <label for="user">Select User</label>
                 <select name="user" id="user">
                     <option value="" selected disabled>Select A User</option>
                     {% for user in users %}
                         <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
                     {% endfor %}
                 </select>
-                <label for="prefix">Select Class Prefix:</label>
+                <label for="prefix">Select Class Prefix</label>
                 <select name="prefix" id="prefix">
                     <option value="" selected disabled>Select A Prefix</option>
                     {% for prefix in prefixes %}
                         <option value="{{ prefix }}">{{ prefix }}</option>
                     {% endfor %}
                 </select>
-                <label for="class_number">Enter Class Number:</label>
+                <label for="class_number">Enter Class Number</label>
                 <input type="text" name="class_number" id="class_number">
                 <button type="submit">Search</button>
             </form>            

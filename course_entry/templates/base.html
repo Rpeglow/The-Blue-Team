@@ -50,7 +50,6 @@
         /* styles for resume builder */
         .container, .work-experience, .education, .skills {
             text-align: left;
-            border: 1px solid black;
             padding: 10px;
             margin: 10px 0;
         }
@@ -73,8 +72,7 @@
         
         a:focus,a:hover {
             outline: 0;
-            color: #e96154;
-            text-decoration: underline
+            color: #FFFFFF;
         }
         
         h1,h2,h3,h4,h5 {
@@ -104,14 +102,17 @@
         }
         
         h3 {
+            color: #8dc63f;
             font-size: 1.5em
         }
         
         h4 {
+            color: #8dc63f;
             font-size: 1.25em
         }
         
         h5 {
+            color: #8dc63f;
             font-size: 1em
         }
         
@@ -223,6 +224,26 @@
         }
 
         #skills {
+            text-align: left;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .job-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .job-list li {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            width: 80%;
             text-align: left;
         }
                 
