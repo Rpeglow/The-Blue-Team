@@ -36,7 +36,11 @@ input {
 
 .resumeFields {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    justify-content: space-around;
+    align-items: center;
+}
+
+input[type="submit" i] {
+    margin-bottom: 2em;
 }

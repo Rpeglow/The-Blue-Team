@@ -16,77 +16,83 @@ Resume Builder
         
         <h1>Welcome to the Resume Builder Portion!</h1>
         <h2>Take your time and develop a working portfolio</h2>
+        <div id="wrapper">
+            <!-- set global for whole page -->
+            <div id="form-wrapper">
 
-        <!-- set global for whole page -->
-        <label for="global_user">Select User:</label>
-        <select name="global_user" id="global_user" >
-            <option value="" selected disabled>Select A User</option>
-            {% for user in users %}
-                <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
-            {% endfor %}
-        </select><br>
+            <label for="global_user">Select User:</label>
+            <select name="global_user" id="global_user" >
+                <option value="" selected disabled>Select A User</option>
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+                {% endfor %}
+            </select>
+            </div><br>
 
-       
+        
 
-        <div class='resumeFields'>
-          
-            <div id='workHistory'>
-                <h3>Work History</h3>
+            <div class='resumeFields'>
+            
+                <div id='workHistory'>
+                    <h3>Work History</h3>
+                    <div id="form-wrapper">
+                        <!-- get user first, two forms -->
+                        <form id="workHistoryForm" method="POST" action="{% url 'send_work_history' %}">{% csrf_token %}
+                            <input type="hidden" name="cuser" id="cuser" >
 
-                <!-- get user first, two forms -->
-                <form id="workHistoryForm" method="POST" action="{% url 'send_work_history' %}">{% csrf_token %}
-                    <input type="hidden" name="cuser" id="cuser" >
+                            <label for="cname">Company:</label><br>
+                            <input type="text" id="cname" name="cname"><br>
+                            <label for="cadd">Address:</label><br>
+                            <input type="text" id="cadd" name="cadd"><br>
+                            <label for="ccity">City:</label><br>
+                            <input type="text" id="ccity" name="ccity"><br>
+                            <label for="cstate">State:</label><br>
+                            <input type="text" id="cstate" name="cstate"><br>
+                            <label for="czip">Zip:</label><br>
+                            <input type="text" id="czip" name="czip"><br>
+                            <label for="cphone">Phone:</label><br>
+                            <input type="tel" id="cphone" name="cphone"><br>
+                            <label for="cstart">Start Date:</label><br>
+                            <input type="date" id="cstart" name="cstart"><br>
+                            <label for="cend">End Date:</label><br>
+                            <input type="date" id="cend" name="cend"><br>
+                            <input type="submit" id="submitOne" value="Submit">
+                        </form>
+                    </div>
+                </div>
 
-                    <label for="cname">Company:</label><br>
-                    <input type="text" id="cname" name="cname"><br>
-                    <label for="cadd">Address:</label><br>
-                    <input type="text" id="cadd" name="cadd"><br>
-                    <label for="ccity">City:</label><br>
-                    <input type="text" id="ccity" name="ccity"><br>
-                    <label for="cstate">State:</label><br>
-                    <input type="text" id="cstate" name="cstate"><br>
-                    <label for="czip">Zip:</label><br>
-                    <input type="text" id="czip" name="czip"><br>
-                    <label for="cphone">Phone:</label><br>
-                    <input type="tel" id="cphone" name="cphone"><br>
-                    <label for="cstart">Start Date:</label><br>
-                    <input type="date" id="cstart" name="cstart"><br>
-                    <label for="cend">End Date:</label><br>
-                    <input type="date" id="cend" name="cend"><br>
-                    <input type="submit" id="submitOne" value="Submit">
+                <div id='education'>
+                    <h3>Education</h3>
+
+                    <div id="form-wrapper">
+                        <form method='POST' action= "{% url 'send_education' %}"> {% csrf_token %}
+                            <input type="hidden" name="suser" id="suser" >
+
+                            <label for="sname">School:</label><br>
+                            <input type="text" id="sname" name="sname"><br>
+                            <label for="sstate">State:</label><br>
+                            <input type="text" id="sstate" name="sstate"><br>
+                            <label for="scity">City:</label><br>
+                            <input type="text" id="scity" name="scity"><br>
+                            <label for="degree">Degree/Certification:</label><br>
+                            <input type="text" id="degree" name="degree"><br>
+                            <label for="sstart">Start Date:</label><br>
+                            <input type="date" id="sstart" name="sstart"><br>
+                            <label for="schoolend">End Date:</label><br>
+                            <input type="date" id="schoolend" name="schoolend"><br>
+                            <input type="submit" id="submitTwo" value="Submit">
+                        </form>
+                    </div>
+                </div>
+
+                <form method="POST" action="{% url 'generated_resume' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="user" id="user">
+                    <button type="submit" id="submitThree">Generate Resume</button>
                 </form>
-            </div>
-
-            <div id='education'>
-                <h3>Education</h3>
-
-                <form method='POST' action= "{% url 'send_education' %}"> {% csrf_token %}
-                    <input type="hidden" name="suser" id="suser" >
-
-                    <label for="sname">School:</label><br>
-                    <input type="text" id="sname" name="sname"><br>
-                    <label for="sstate">State:</label><br>
-                    <input type="text" id="sstate" name="sstate"><br>
-                    <label for="scity">City:</label><br>
-                    <input type="text" id="scity" name="scity"><br>
-                    <label for="degree">Degree/Certification:</label><br>
-                    <input type="text" id="degree" name="degree"><br>
-                    <label for="sstart">Start Date:</label><br>
-                    <input type="date" id="sstart" name="sstart"><br>
-                    <label for="schoolend">End Date:</label><br>
-                    <input type="date" id="schoolend" name="schoolend"><br>
-                    <input type="submit" id="submitTwo" value="Submit">
-                </form>
 
             </div>
-        <form method="POST" action="{% url 'generated_resume' %}">
-            {% csrf_token %}
-            <input type="hidden" name="user" id="user">
-            <button type="submit" id="submitThree">Generate Resume</button>
-        </form>
-
         </div>
-
        
 
         <script>
