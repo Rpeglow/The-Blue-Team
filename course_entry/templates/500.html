@@ -7,6 +7,8 @@
 
 {% block content %}
     <h1>Server Error</h1>
-    <p>There was a server error.</p>
-    <a href="{% url 'image_page' %}">Go to Home</a>
+    <div id="wrapper">
+        <p>There was a server error.</p>
+        <a href="{% url 'image_page' %}">Go to Home</a>
+    </div>
 {% endblock %}

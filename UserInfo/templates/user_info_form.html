@@ -8,11 +8,15 @@ New User Creation
 {% block content %}
 
     <h1>New User Creation</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
+        <div id="wrapper">
+            <div id="form-wrapper">
+                <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
 
     <script>
         document.getElementById('id_phone').addEventListener('keyup', function(e) {

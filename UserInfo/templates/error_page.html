@@ -2,11 +2,17 @@
 {% load static %}
 
 {% block title %}
-    Error
+Error Creating User
 {% endblock %}
 
 {% block content %}
+
+<body>
     <h1>Error</h1>
-    <p>{{ error_message }}</p>
-    <a href="{% url 'user_info_form' %}">Go back to form</a>
+    <div id="wrapper">
+        <p>{{ error_message }}</p>
+        <button onclick="window.location.href='{% url 'user_info_form' %}'">Return to User Creation Form</button>
+    </div>
+</body>
+
 {% endblock %}

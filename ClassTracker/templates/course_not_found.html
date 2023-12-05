@@ -9,8 +9,10 @@ Course Not Found
 
 <body>
     <h1>Course Not Found</h1>
-    <p>The entered course information was not found. Please try again.</p>
-    <button onclick="window.location.href='{% url 'class_tracker' %}'">Return to Search</button>
+    <div id="wrapper">
+        <p>The entered course information was not found. Please try again.</p>
+        <button onclick="window.location.href='{% url 'class_tracker' %}'">Return to Search</button>
+    </div>
 </body>
     
 {% endblock %}

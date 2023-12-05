@@ -6,23 +6,28 @@ Job List
 {% endblock %}
 
 {% block content %}
-
+<body>
     <h1>Jobs Found</h1>
-    <div class="job-list">
+    <div id="wrapper">
         {% if jobs %}
-            <ul>
+        <div class="container">
+            <ul class="job_list">
                 {% for job in jobs %}
                     <li>
-                        <h2>{{ job.job_name }}</h2>
-                        <p>Salary Range: {{ job.salary_range }}</p>
-                        <p>Description: {{ job.description }}</p>
-                        <a href="{{ job.hyperlink }}" target="_blank">Job Link</a>
+                        <h3>{{ job.job_name }}</h3>
+                        {% if job.salary_range != 'N/A' %}
+                            <p>Salary Range: {{ job.salary_range }}</p>
+                        {% endif %}
+                        <p>Company Information: {{ job.description }}</p>
+                        <a href="{{ job.hyperlink }}" target="_blank">Job Link</a><br><br><br>
                     </li>
                 {% endfor %}
             </ul>
+        </div>
         {% else %}
             <p>No jobs found based on your search criteria.</p>
         {% endif %}
-        <p><a href="{% url 'job_search' %}">Back to Job Search</a></p>
+        <button onclick="window.location.href='{% url 'job_search' %}'">Return to Search</button>
     </div>
+</body>
 {% endblock %}
