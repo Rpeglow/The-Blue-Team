@@ -2,23 +2,27 @@
 {% load static %}
 
 {% block title %}
-Course Details
+    Course Details
 {% endblock %}
 
 {% block content %}
-<h2>Course Details</h2>
-<p>Course Number: {{ course.course_number }}</p>
-<p>Name: {{ course.name }}</p>
-<p>Description: {{ course.description }}</p>
+<body>
+    <h1>Course Details</h1>
+    <div id="wrapper">
+        <p>Course Number: {{ course.course_number }}</p>
+        <p>Name: {{ course.name }}</p>
+        <p>Description: {{ course.description }}</p>
 
-<h2>Related Skills</h2>
-<ul>
-  {% for course_skill in course.courseskill_set.all %}
-    <p>{{ course_skill.skills_id.skill_keyword }}</p>
-  {% empty %}
-    <li>No skills available for this course yet.</li>
-  {% endfor %}
-</ul>
+        <h2>Related Skills</h2>
+        <ul>
+          {% for course_skill in course.courseskill_set.all %}
+            <p>{{ course_skill.skills_id.skill_keyword }}</p>
+          {% empty %}
+            <li>No skills available for this course yet.</li>
+          {% endfor %}
+        </ul>
 
-<button onclick="window.location.href='{% url 'class_tracker' %}'">Return to Search</button>
+        <button onclick="window.location.href='{% url 'class_tracker' %}'">Return to Search</button>
+    </div>
+</body>
 {% endblock %}

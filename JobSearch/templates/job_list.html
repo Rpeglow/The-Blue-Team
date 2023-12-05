@@ -6,9 +6,9 @@ Job List
 {% endblock %}
 
 {% block content %}
-
+<body>
     <h1>Jobs Found</h1>
-    <div class="job-list">
+    <div class="wrapper">
         {% if jobs %}
             <ul>
                 {% for job in jobs %}
@@ -23,6 +23,7 @@ Job List
         {% else %}
             <p>No jobs found based on your search criteria.</p>
         {% endif %}
-        <p><a href="{% url 'job_search' %}">Back to Job Search</a></p>
+        <button onclick="window.location.href='{% url 'job_search' %}'">Return to Search</button>
     </div>
+</body>
 {% endblock %}

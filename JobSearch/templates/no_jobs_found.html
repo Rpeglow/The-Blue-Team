@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{%load static%}
+{% load static %}
 
 {% block title %}
 No Jobs Found
@@ -7,9 +7,12 @@ No Jobs Found
 
 {% block content %}
 
-    <div class="container">
-        <h1>No Jobs Found</h1>
+<body>
+    <h1>No Jobs Found</h1>
+    <div id="wrapper">
         <p>Sorry, there are currently no jobs available based on your search criteria.</p>
-        <p><a href="{% url 'job_search' %}">Back to Job Search</a></p>
+        <button onclick="window.location.href='{% url 'job_search' %}'">Return to Search</button>
     </div>
+</body>
+
 {% endblock %}
