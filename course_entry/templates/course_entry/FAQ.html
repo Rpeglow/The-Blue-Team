@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+FAQ
+{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .faq-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px
+        }
+
+        .faq-item {
+            width: 30%;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #383838;
+            border-radius: 5px;
+        }
+
+        h3 {
+            margin-top: 0;
+        }
+
+        .contact-us {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Frequently Asked Questions</h1>
+    <div id="wrapper">
+        <p>Below are some of the most common questions we get asked. If you have any additional questions please feel free to contact us.</p>
+        <div class="faq-container">
+            <div class="faq-item">
+                <h3>Can I create a Indeed profile on this website?</h3>
+                <p>While we are currently developing new features as of now you are not able to create an Indeed profile directly from this application.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How long does it take to get my results?</h3>
+                <p>Depending on current internet connections results can take between 10-40 seconds.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Will I need to sumbit my resume on Indeed?</h3>
+                <p>Yes, we are always happy to hear you futhering your career and helping create a one of a kind resume however we are not able to sumbit resumes to Indeed?</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Do you have multiple templetes I can use for my resume?</h3>
+                <p>Currently we have deployed with one resume templete however more are on the way.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Do I have to pay for this service?</h3>
+                <p>No. Currently our aggreement with Ivytech allows studetns to use this service free of charge. </p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can I look up other courses from other schools.</h3>
+                <p>Currently our database focuses on coruses provided from Ivytech.</p>
+            </div>
+        </div>
+
+        <div class="contact-us">
+            <h2>Contact Us</h2>
+            <p>If you have additional questions, please feel free to contact us.</p>
+            <p>Student-careers@ivytech.edu</p>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
+

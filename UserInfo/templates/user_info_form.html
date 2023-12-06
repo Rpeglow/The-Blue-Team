@@ -7,8 +7,9 @@ New User Creation
 
 {% block content %}
 
+<body>
     <h1>New User Creation</h1>
-        <div id="wrapper">
+    <div id="wrapper">
             <div id="form-wrapper">
                 <form method="post">
                 {% csrf_token %}
@@ -17,17 +18,19 @@ New User Creation
             </form>
         </div>
     </div>
+</body>
 
-    <script>
-        document.getElementById('id_phone').addEventListener('keyup', function(e) {
-            var value = e.target.value;
-            value = value.replace(/-/g, '');
-            if (value.length > 3 && value.length <= 6)
-                value = value.slice(0,3) + '-' + value.slice(3);
-            else if (value.length > 6)
-                value = value.slice(0,3) + '-' + value.slice(3,6) + '-' + value.slice(6);
-            e.target.value = value;
-        });
-        </script>
+<script>
+    document.getElementById('id_phone').addEventListener('keyup', function(e) {
+        var value = e.target.value;
+        value = value.replace(/-/g, '');
+        if (value.length > 3 && value.length <= 6)
+            value = value.slice(0,3) + '-' + value.slice(3);
+        else if (value.length > 6)
+            value = value.slice(0,3) + '-' + value.slice(3,6) + '-' + value.slice(6);
+        e.target.value = value;
+    });
+</script>
+
 {% endblock %}
 
