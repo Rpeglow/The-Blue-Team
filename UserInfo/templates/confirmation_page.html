@@ -14,7 +14,7 @@
         {% else %}
             <p>No user information available.</p>
         {% endif %}
-        <a href="{% url 'user_info_form' %}">Go back to form</a>
+        <button onclick="window.location.href='{% url 'user_info_form' %}'">Return to Form</button>
     </div>
 </body>
 {% endblock %}

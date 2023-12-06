@@ -14,8 +14,7 @@ h2 {
 
 h3 {
     color: #93b7d1;
-} */
-
+} 
 li {
     list-style-type: none;
     margin-bottom: 2px;
@@ -33,10 +32,25 @@ input {
     margin-top: 5px;
     margin-bottom: 5px;
 }
+*/
 
 .resumeFields {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    justify-content: space-around;
+    align-items: center;
+}
+
+input[type="submit" i] {
+    margin-bottom: 2em;
+}
+
+.container, .work-experience, .education, .skills {
+    text-align: left;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+div #education, div #workHistory, div #generate_resume {
+    width: 100%;
 }

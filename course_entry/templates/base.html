@@ -53,13 +53,6 @@
             padding-bottom: 75px;
         }
 
-        /* styles for resume builder */
-        .container, .work-experience, .education, .skills {
-            text-align: left;
-            padding: 10px;
-            margin: 10px 0;
-        }
-
         *,:after,:before {
             box-sizing: border-box
         }
@@ -139,11 +132,11 @@
             font-size: .8333em
         }
         
-        button,input[type=email],input[type=password],input[type=search],input[type=tel],input[type=text],textarea {
+        button,input[type=email],input[type=password],input[type=search],input[type=tel],input[type=text],input[type=date],textarea {
             font-family: open-sans,Helvetica,Arial,sans-serif
         }
                
-        input[type=email],input[type=number],input[type=password],input[type=search],input[type=tel],input[type=text],select {
+        input[type=email],input[type=number],input[type=password],input[type=search],input[type=tel],input[type=text],input[type=date],select {
             color: #000;
             border-radius: 10px;
             border: 1px solid #e4e5e6;
@@ -210,6 +203,25 @@
         
         input[type=range]:focus::-moz-range-thumb {
             outline: 2px solid #e96154
+        }
+
+        input[type=submit],button {
+            color: #fff;
+            background-color: #2a8646;
+            border-color: #2a8646;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 1em;
+            font-weight: 400;
+            line-height: 1.5;
+            margin: 0;
+            padding: 6px 12px;
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            white-space: nowrap
         }
 
         #wrapper {

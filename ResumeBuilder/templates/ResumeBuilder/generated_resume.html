@@ -5,24 +5,23 @@
 Generated Resume
 {% endblock %}
 
-
+{% block content %}
 <html>
     <head>
-       
-     
+        <link rel="stylesheet" href="{% static 'CSS/GeneratedResume.css' %}">
     </head>
-   
-    {% block content %}
+
     <body>
         <div class="container">
+            <h1> {{ user.first_name }} {{ user.last_name }}</h1>
             <div class="user-info">
-                <h3>User Info:</h3>
-                <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
-                <p><strong>Address:</strong> {{ user.address }}, {{ user.city }}, {{ user.state }}, {{ user.zip }}</p>
-                <p><strong>Phone:</strong> {{ user.phone }}</p>
-                <p><strong>Email:</strong> {{ user.email }}</p>
+                <h4>{{ user.tagline }}</h4>
+                <p>{{ user.address }}, {{ user.city }}, {{ user.state }}, {{ user.zip_code }}</p>
+                <p>{{ user.phone }}</p>
+                <p>{{ user.email }}</p>
             </div>
-
+            
+            {% if work_experience %}
             <div class="work-experience">
                 <h3>Work Experience:</h3>
                 {% for job in work_experience %}
@@ -36,7 +35,9 @@ Generated Resume
                     </div>
                 {% endfor %}
             </div>
+            {% endif %}
 
+            {% if education %}
             <div class="education">
                 <h3>Education:</h3>
                 {% for school in education %}
@@ -50,7 +51,9 @@ Generated Resume
                     </div>
                 {% endfor %}
             </div>
+            {% endif %}
 
+            {% if user_skills %}
             <div class="skills">
                 <h3>Skills:</h3>
                 <ul>
@@ -59,10 +62,11 @@ Generated Resume
                     {% endfor %}
                 </ul>
             </div>
+            {% endif %}
         </div>
-        
-
-    {% endblock %}
-
+        <div id="wrapper">
+            <button onclick="window.location.href='{% url 'resume_builder' %}'">Return to Resume Builder</button>
+        </div>
     </body>
 </html>
+{% endblock %}
