@@ -9,10 +9,28 @@ from .models import UserInformation
 
 
 def resume_builder(request):
+    """
+    Renders the resume builder page.
+    
+    Args:
+        request (HttpRequest): The HTTP request.
+        
+    Returns:    
+        HttpResponse: The HTTP response.
+    """
     users = UserInformation.objects.all()
     return render(request, 'ResumeBuilder/resume_builder.html', {'users': users})
 
 def generated_resume(request):
+    """
+    Renders the generated resume page.
+
+    Args:
+        request (HttpRequest): The HTTP request.
+
+    Returns:
+        HttpResponse: The HTTP response.
+    """
     if request.method == 'POST':
         user_id = request.POST['user']
 
@@ -34,6 +52,15 @@ def generated_resume(request):
     return render(request, 'ResumeBuilder/generated_resume.html', {'user': user,'work_experience': work_experience, 'education': eduction, 'user_skills': user_skills})
 
 def send_work_history(request):
+    """
+    Sends work history information to the database.
+
+    Args:
+        request (HttpRequest): The HTTP request.
+
+    Returns:
+        HttpResponse: The HTTP response.
+    """
     users = UserInformation.objects.all()
     if request.method == 'POST':
         company_name = request.POST['cname']
@@ -59,6 +86,15 @@ def send_work_history(request):
     return render(request, 'ResumeBuilder/resume_builder.html', {'users': users})
 
 def send_education(request):
+    """
+    Sends education information to the database.
+
+    Args:
+        request (HttpRequest): The HTTP request.
+    
+    Returns:
+        HttpResponse: The HTTP response.
+    """
     users = UserInformation.objects.all()
     if request.method == 'POST':
         school_name =request.POST['sname']
@@ -84,5 +120,14 @@ def send_education(request):
 
 
 def resume(request):
+    """
+    Renders the resume builder page.
+
+    Args:
+        request (HttpRequest): The HTTP request.
+
+    Returns:
+        HttpResponse: The HTTP response.
+    """
     keywords = Skill.objects.all()
     return render(request, 'ResumeBuilder/resume_builder.html', {'keywords': keywords})

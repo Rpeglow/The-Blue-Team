@@ -6,10 +6,29 @@ from ClassTracker.models import CourseSkill, UserCourse
 from .indeed import perform_job_search
 
 def job_search(request):
+    """
+    Renders the job search page.
+
+    Args:
+        request (HttpRequest): The HTTP request.
+    
+    Returns:
+        HttpResponse: The HTTP response.
+    """
     users = UserInformation.objects.all()
     return render(request, 'job_search.html', {'users': users})
 
 def fetch_skills(request, user_id):
+    """
+    Fetches the skills associated with a user.
+
+    Args:
+        request (HttpRequest): The HTTP request.
+        user_id (int): The id of the user.
+    
+    Returns:
+        JsonResponse: The JSON response.
+    """
     user = get_object_or_404(UserInformation, pk=user_id)
     user_courses = UserCourse.objects.filter(user=user)
     
@@ -23,6 +42,15 @@ def fetch_skills(request, user_id):
     return JsonResponse({'skills': associated_skills})
 
 def confirm_job_search(request):
+    """
+    Renders the job search confirmation page.
+
+    Args:
+        request (HttpRequest): The HTTP request.
+
+    Returns:
+        HttpResponse: The HTTP response.
+    """
     if request.method == 'POST':
         user_id = request.POST.get('user_id')
         keywords = request.POST.getlist('selected_skills')
@@ -52,6 +80,15 @@ def confirm_job_search(request):
 
 
 def load_previous_jobs(request):
+    """
+    Renders the job list page.
+
+    Args:
+        request (HttpRequest): The HTTP request.
+
+    Returns:
+        HttpResponse: The HTTP response.
+    """
     if request.method == 'POST':
         user_id = request.POST.get('p_user_id')
 
@@ -61,10 +98,3 @@ def load_previous_jobs(request):
             jobs = Job.objects.filter(user=user)
             
             return render(request, 'job_list.html', {'jobs': jobs})
-    
-""" def load_previous_jobs(request, p_user_id):
-    user = UserInformation.objects.get(pk=p_user_id)
-    
-    jobs = Job.objects.filter(user=user)
-    
-    return render(request, 'job_list.html', {'jobs': jobs}) """

@@ -53,17 +53,24 @@ Career Development System - Course Entry
     left: 50%;
     transform: translateX(-50%);
     color: white;
-    text-shadow: -2px -2px 0 #000,
-        2px -2px 0 #000,
-        -2px 2px 0 #000,
-        2px 2px 0 #000;
+    text-shadow: -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
     font-size: 60px;
     padding: 5px;
 }
 
 </style>
-    <h1>Welcome to the Student Career Development System</h1>
+    <h1>Student Career Development System</h1>
+
+    <div id="wrapper">
+
     <h2>We are here to make the next step easier!</h2>
+    <p>Here you can find all the information you need to make the next step in your career. Whether you are looking for a new job, or you are looking to improve your skills, we are here to help.</p>
+    <p>Create a new user profile or use the links below to get started.</p>
+    <br>
+
     <div class="image-container">
         {% for image in images %}
             <div>
@@ -77,5 +84,6 @@ Career Development System - Course Entry
                 </div>
             </div>
         {% endfor %}
+    </div>
     </div>
 {% endblock %}

@@ -1,299 +1,386 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        /* Common styles for both mobile and desktop */
-        html {
-            font: normal 100%/1.375 open-sans,Helvetica,Arial,sans-serif
-        }
-        
-        body {
-            background: #fff;
-            color: #000;
-            margin: 0;
-            padding: 0;
-            font-smoothing: antialiased;
-            -webkit-font-smoothing: antialiased
-        }
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+        <style>
 
-        .navbar {
-            background-color: #006648;
-            overflow: hidden;
-        }
-        .navbar a {
-            float: left;
-            display: block;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-        .navbar a:hover {
-            background-color: #939598;
-        }
-        .navbar-left {
-            float: left;
-        }
-        .navbar-right {
-            float: right;
-        }
-        .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1px 0;
-        }
-        .content {
-            padding-bottom: 75px;
-        }
+            /* Common styles for both mobile and desktop */
+            html {
+                font: normal 100%/1.375 Lato, 'Open Sans', Helvetica, Arial, sans-serif
+            }
+            
+            body {
+                background: #fff;
+                color: #000;
+                margin: 0;
+                padding: 0;
+                -webkit-font-smoothing: antialiased
+            }
+            
+            .topnav {
+                background-color: #006648;
+                overflow: hidden;
+            }
+            
+            .topnav a {
+                float: left;
+                display: block;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+            
+            .topnav .icon {
+                display: none;
+            }
+            
+            .topnav a:hover,
+            .dropdown:hover .dropbtn {
+                background-color: #8dc63f;
+            }
+            
+            .topnav a.split {
+                float: right;
+            }
+            
+            .footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                background-color: #333;
+                color: white;
+                text-align: center;
+                padding: 1px 0;
+            }
+            
+            .content {
+                padding-bottom: 75px;
+            }
+            
+            *,
+            :after,
+            :before {
+                box-sizing: border-box
+            }
+            
+            img {
+                border: 0;
+                max-width: 100%;
+                height: auto
+            }
+            
+            a {
+                color: #2a8646;
+                font-weight: 600;
+                text-decoration: none
+            }
+            
+            a:focus,
+            a:hover {
+                outline: 0;
+                color: #FFFFFF;
+            }
+            
+            h1,
+            h2,
+            h3,
+            h4,
+            h5 {
+                font-weight: 700;
+                line-height: 1.2;
+                margin: 1em 0 .25em
+            }
+            
+            h2:first-child,
+            h3:first-child,
+            h4:first-child,
+            h5:first-child {
+                margin-top: 0
+            }
+            
+            h1 {
+                color: #41AD49;
+                text-align: center;
+                font-size: 3em;
+                text-transform: uppercase;
+            }
+            
+            h2 {
+                color: #8dc63f;
+                text-align: center;
+                font-size: 2em
+            }
+            
+            h3 {
+                color: #8dc63f;
+                font-size: 1.5em
+            }
+            
+            h4 {
+                color: #8dc63f;
+                font-size: 1.25em
+            }
+            
+            h5 {
+                color: #8dc63f;
+                font-size: 1em
+            }
+            
+            ol,
+            p,
+            ul {
+                margin: 1em 0
+            }
+            
+            ul {
+                padding-inline-start: 0;
+                list-style: none
+            }
+            
+            h1+p,
+            h2+p,
+            h3+p,
+            h4+p,
+            h5+p {
+                margin-top: 0
+            }
+            
+            small {
+                font-size: .8333em
+            }
+            
+            button,
+            input[type=email],
+            input[type=password],
+            input[type=search],
+            input[type=tel],
+            input[type=text],
+            input[type=date],
+            textarea {
+                font-family: open-sans, Helvetica, Arial, sans-serif
+            }
+            
+            input[type=email],
+            input[type=number],
+            input[type=password],
+            input[type=search],
+            input[type=tel],
+            input[type=text],
+            input[type=date],
+            select {
+                color: #000;
+                border-radius: 10px;
+                border: 1px solid #e4e5e6;
+                font-size: .875em;
+                line-height: 1.35714286;
+                margin: 0;
+                padding: 3px 10px;
+                width: 100%;
+                background: #f5f5f5
+            }
+            
+            textarea {
+                color: #000;
+                border-radius: 10px;
+                border: 1px solid #e4e5e6;
+                font-size: .875em;
+                line-height: 1.35714286;
+                margin: 0;
+                padding: 3px 10px;
+                width: 100%;
+                background: #f5f5f5
+            }
+            
+            select {
+                padding: 2px 10px;
+                -webkit-appearance: auto;
+                -moz-appearance: auto;
+                appearance: auto
+            }
+            
+            input[type=range] {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                width: 100%;
+                height: 5px;
+                border-radius: 2.5px;
+                background: #2a8646;
+                outline: 0;
+                margin: 0
+            }
+            
+            input[type=range]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 16px;
+                height: 16px;
+                background: #fff;
+                border-radius: 50%;
+                box-shadow: 0 3px 6px rgba(0, 0, 0, .16)
+            }
+            
+            input[type=range]::-moz-range-thumb {
+                width: 16px;
+                height: 16px;
+                background: #fff;
+                border-radius: 50%;
+                box-shadow: 0 3px 6px rgba(0, 0, 0, .16)
+            }
+            
+            input[type=range]:focus::-webkit-slider-thumb {
+                outline: 2px solid #e96154
+            }
+            
+            input[type=range]:focus::-moz-range-thumb {
+                outline: 2px solid #e96154
+            }
+            
+            input[type=submit],
+            button {
+                color: #fff;
+                background-color: #2a8646;
+                border-color: #2a8646;
+                border-radius: 10px;
+                border: 1px solid transparent;
+                cursor: pointer;
+                display: inline-block;
+                font-size: 1em;
+                font-weight: 400;
+                line-height: 1.5;
+                margin: 0;
+                padding: 6px 12px;
+                text-align: center;
+                text-decoration: none;
+                vertical-align: middle;
+                white-space: nowrap
+            }
+            
+            #wrapper {
+                margin: 0 auto;
+                max-width: 1920px;
+                padding: 0 20px;
+                overflow: hidden;
+                box-sizing: content-box;
+                text-align: center;
+            }
+            
+            #form-wrapper {
+                margin: 0 auto;
+                max-width: 400px;
+                padding: 0 20px;
+                overflow: hidden;
+                box-sizing: content-box;
+            }
+            
+            #skills {
+                text-align: left;
+            }
+            
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .job-list {
+                list-style: none;
+                padding: 0;
+            }
+            
+            .job-list li {
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                padding: 15px;
+                margin: 10px 0;
+                width: 80%;
+                text-align: left;
+            }
+            
+            @media screen and (max-width: 810px) {
+            
+                .topnav a:not(:first-child),
+                .dropdown .dropbtn {
+                    display: none;
+                }
+            
+                .topnav a.icon {
+                    float: right;
+                    display: block;
+                }
+            
+                .topnav.responsive {
+                    position: relative;
+                }
+            
+                .topnav.responsive a.icon {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                }
+            
+                .topnav.responsive a {
+                    float: none;
+                    display: block;
+                    text-align: left;
+                }
+            
+                .topnav.responsive .dropdown {
+                    float: none;
+                }
+            
+                .topnav.responsive .dropdown-content {
+                    position: relative;
+                }
+            
+                .topnav.responsive .dropdown .dropbtn {
+                    display: block;
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+            
+            </style>
+		<title>{% block title %}{% endblock %}</title>
+	</head>
 
-        *,:after,:before {
-            box-sizing: border-box
-        }
-        
-        img {
-            border: 0;
-            max-width: 100%;
-            height: auto
-        }
-        
-        a {
-            color: #2a8646;
-            font-weight: 600;
-            text-decoration: none
-        }
-        
-        a:focus,a:hover {
-            outline: 0;
-            color: #FFFFFF;
-        }
-        
-        h1,h2,h3,h4,h5 {
-            font-weight: 700;
-            line-height: 1.2;
-            margin: 1em 0 .25em
-        }
-        
-        h1:first-child {
-            margin-top: .5em
-        }
+	<body>
+		<!-- Navigation bar -->
+		<div class="topnav" id="myTopnav">
+			<a href="{% url 'image_page' %}">Home</a>
+			<a href="{% url 'user_info_form' %}">New User Creation</a>
+			<a href="{% url 'class_tracker' %}">Course & Skill Search</a>
+			<a href="{% url 'resume_builder' %}">Resume Builder</a>
+			<a href="{% url 'job_search' %}">Job Search</a>
+			<a href="{% url 'about' %}" class="split">About</a>
+			<a href="{% url 'FAQ' %}" class="split">FAQ</a>
+			<a href="javascript:void(0);" class="icon" onclick="responsiveNav()">&#9776;</a>
+		</div>
 
-        h2:first-child,h3:first-child,h4:first-child,h5:first-child {
-            margin-top: 0
-        }
-        
-        h1 {
-            color: #41AD49;
-            text-align: center;
-            font-size: 3em
-        }
-        
-        h2 {
-            color: #8dc63f;
-            text-align: center;
-            font-size: 2em
-        }
-        
-        h3 {
-            color: #8dc63f;
-            font-size: 1.5em
-        }
-        
-        h4 {
-            color: #8dc63f;
-            font-size: 1.25em
-        }
-        
-        h5 {
-            color: #8dc63f;
-            font-size: 1em
-        }
-        
-        ol,p,ul {
-            margin: 1em 0
-        }
-        
-        ul {
-            padding-inline-start: 0;
-            list-style: none
-        }
+		<div class="content">
+			{% block content %}
+			<!-- Main Content goes here -->
+			{% endblock %}
+		</div>
 
-        h1+p,h2+p,h3+p,h4+p,h5+p {
-            margin-top: 0
-        }
-        
-        small {
-            font-size: .8333em
-        }
-        
-        button,input[type=email],input[type=password],input[type=search],input[type=tel],input[type=text],input[type=date],textarea {
-            font-family: open-sans,Helvetica,Arial,sans-serif
-        }
-               
-        input[type=email],input[type=number],input[type=password],input[type=search],input[type=tel],input[type=text],input[type=date],select {
-            color: #000;
-            border-radius: 10px;
-            border: 1px solid #e4e5e6;
-            font-size: .875em;
-            line-height: 1.35714286;
-            margin: 0;
-            padding: 3px 10px;
-            width: 100%;
-            background: #f5f5f5
-        }
+		<div class="footer">
+			<p>Copyright &copy; 2023 Student Career Development System</p>
+		</div>
 
-        textarea {
-            color: #000;
-            border-radius: 10px;
-            border: 1px solid #e4e5e6;
-            font-size: .875em;
-            line-height: 1.35714286;
-            margin: 0;
-            padding: 3px 10px;
-            width: 100%;
-            background: #f5f5f5
-        }
-       
-        select {
-            padding: 2px 10px;
-            -webkit-appearance: auto;
-            -moz-appearance: auto;
-            appearance: auto
-        }
-        
-        input[type=range] {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            width: 100%;
-            height: 5px;
-            border-radius: 2.5px;
-            background: #2a8646;
-            outline: 0;
-            margin: 0
-        }
-        
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 16px;
-            height: 16px;
-            background: #fff;
-            border-radius: 50%;
-            box-shadow: 0 3px 6px rgba(0,0,0,.16)
-        }
-        
-        input[type=range]::-moz-range-thumb {
-            width: 16px;
-            height: 16px;
-            background: #fff;
-            border-radius: 50%;
-            box-shadow: 0 3px 6px rgba(0,0,0,.16)
-        }
-        
-        input[type=range]:focus::-webkit-slider-thumb {
-            outline: 2px solid #e96154
-        }
-        
-        input[type=range]:focus::-moz-range-thumb {
-            outline: 2px solid #e96154
-        }
-
-        input[type=submit],button {
-            color: #fff;
-            background-color: #2a8646;
-            border-color: #2a8646;
-            border-radius: 10px;
-            border: 1px solid transparent;
-            cursor: pointer;
-            display: inline-block;
-            font-size: 1em;
-            font-weight: 400;
-            line-height: 1.5;
-            margin: 0;
-            padding: 6px 12px;
-            text-align: center;
-            text-decoration: none;
-            vertical-align: middle;
-            white-space: nowrap
-        }
-
-        #wrapper {
-            margin: 0 auto;
-            max-width: 1920px;
-            padding: 0 20px;
-            overflow: hidden;
-            box-sizing: content-box;
-            text-align: center;
-        }
-
-        #form-wrapper {
-            margin: 0 auto;
-            max-width: 400px;
-            padding: 0 20px;
-            overflow: hidden;
-            box-sizing: content-box;
-        }
-
-        #skills {
-            text-align: left;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .job-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .job-list li {
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 10px 0;
-            width: 80%;
-            text-align: left;
-        }
-                
-    </style>
-
-    <title>{% block title %}{% endblock %}</title>
-</head>
-<body>
-    <!-- Navigation bar -->
-    <div class="navbar">
-        <div class="navbar-left">
-        <a href="{% url 'image_page' %}">Home</a>
-        <a href="{% url 'user_info_form' %}">New User Creation</a>
-        <a href="{% url 'class_tracker' %}">Course & Skill Search</a>
-        <a href="{% url 'resume_builder' %}">Resume Builder</a>
-        <a href="{% url 'job_search' %}">Job Search</a>
-        </div>
-        <div class="navbar-right">
-        <a href="{% url 'about' %}">About</a>
-        <a href="{% url 'FAQ' %}">FAQ</a>
-        </div>
-    </div>
-    
-
-    <div class="content">
-        {% block content %}
-        <!-- Main Content goes here -->
-        {% endblock %}
-    </div>
-
-    <div class="footer">
-        <p>Copyright &copy; 2023 Student Career Development System</p>
-    </div>
-</body>
+		<script>
+			function responsiveNav() {
+			    var x = document.getElementById("myTopnav");
+			    if (x.className === "topnav") {
+			        x.className += " responsive";
+			    } else {
+			        x.className = "topnav";
+			    }
+			}
+		</script>
+	</body>
 </html>
