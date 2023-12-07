@@ -311,6 +311,16 @@ Resume Builder
                     event.preventDefault();  // prevent form from submitting
                 }
             });
+
+            // form validation for generate_resume
+            document.getElementById('generate_resume').querySelector('form').addEventListener('submit', function(event) {
+                var resume_user_id = document.getElementById('user').value;
+            
+                if (resume_user_id == '') {
+                    alert('Please Select a User.');
+                    event.preventDefault();  // prevent form from submitting
+                }
+            });
         </script>
 
     </body>
