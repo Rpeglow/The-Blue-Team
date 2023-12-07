@@ -10,10 +10,22 @@ New User Creation
 <body>
     <h1>New User Creation</h1>
     <div id="wrapper">
-            <div id="form-wrapper">
-                <form method="post">
+        <p>Fill out the form below to create a new user.  Fields marked with <span>*</span> are required.</p>
+        <div id="form-wrapper">
+            <form method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {% for field in form %}
+                    <p class="form-field">
+                        {{ field.label_tag }}
+                        {% if field.field.required %}
+                            <span>*</span>
+                        {% endif %}
+                        {{ field }}
+                        {% for error in field.errors %}
+                            <p class="error">{{ error }}</p>
+                        {% endfor %}
+                    </p>
+                {% endfor %}
                 <button type="submit">Submit</button>
             </form>
         </div>

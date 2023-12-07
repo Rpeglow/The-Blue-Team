@@ -7,6 +7,23 @@ from ClassTracker.models import Skill, CourseSkill, UserCourse
 
 # Creates structure of information being passed to the database from the Work History Section
 class WorkHistory(models.Model):
+    """
+    Represents a work history in the ResumeBuilder system.
+
+    Attributes:
+        user (ForeignKey): The user.
+        company_name (CharField): The company name.
+        work_address (CharField): The work address.
+        city (CharField): The city.
+        state (CharField): The state.
+        zip (CharField): The zip code.
+        phone (CharField): The phone number.
+        start_date (DateField): The start date.
+        end_date (DateField): The end date.
+    
+    Methods:
+        __str__(): Returns a string representation of the work history.
+    """
     user = models.ForeignKey(UserInformation, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=100)
     work_address = models.CharField(max_length=100)
@@ -22,6 +39,21 @@ class WorkHistory(models.Model):
     
 # Creates structure of information being passed to the database from the Education Section
 class Education(models.Model):
+    """
+    Represents an education in the ResumeBuilder system.
+
+    Attributes:
+        user (ForeignKey): The user.
+        school_name (CharField): The school name.
+        school_state (CharField): The school state.
+        school_city (CharField): The school city.
+        degree (CharField): The degree.
+        school_start_date (DateField): The start date.
+        school_end_date (DateField): The end date.
+
+    Methods:
+        __str__(): Returns a string representation of the education.
+    """
     school_name = models.CharField(max_length=100)
     school_state = models.CharField(max_length=100)
     school_city = models.CharField(max_length=100)

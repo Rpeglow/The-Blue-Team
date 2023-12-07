@@ -9,12 +9,30 @@ from .models import UserInformation
 
 # Information from UserInformation class is passed to resumer_builder page
 def resume_builder(request):
+    """
+    Renders the resume builder page.
+    
+    Args:
+        request (HttpRequest): The HTTP request.
+        
+    Returns:    
+        HttpResponse: The HTTP response.
+    """
     users = UserInformation.objects.all()
     return render(request, 'ResumeBuilder/resume_builder.html', {'users': users})
 
 # Information from classes: UserInformation, WorkHistory, Education, and UserCourse
 # is passed to generated_resume page
 def generated_resume(request):
+    """
+    Renders the generated resume page.
+
+    Args:
+        request (HttpRequest): The HTTP request.
+
+    Returns:
+        HttpResponse: The HTTP response.
+    """
     if request.method == 'POST':
         user_id = request.POST['user']
 
@@ -38,6 +56,15 @@ def generated_resume(request):
 
 # Information entered in the Work History section is sent to the database
 def send_work_history(request):
+    """
+    Sends work history information to the database.
+
+    Args:
+        request (HttpRequest): The HTTP request.
+
+    Returns:
+        HttpResponse: The HTTP response.
+    """
     users = UserInformation.objects.all()
     if request.method == 'POST':
         company_name = request.POST['cname']
@@ -64,6 +91,15 @@ def send_work_history(request):
 
 # Information entered in the Education section is sent to the database
 def send_education(request):
+    """
+    Sends education information to the database.
+
+    Args:
+        request (HttpRequest): The HTTP request.
+    
+    Returns:
+        HttpResponse: The HTTP response.
+    """
     users = UserInformation.objects.all()
     if request.method == 'POST':
         school_name =request.POST['sname']
@@ -89,5 +125,14 @@ def send_education(request):
 
 
 def resume(request):
+    """
+    Renders the resume builder page.
+
+    Args:
+        request (HttpRequest): The HTTP request.
+
+    Returns:
+        HttpResponse: The HTTP response.
+    """
     keywords = Skill.objects.all()
     return render(request, 'ResumeBuilder/resume_builder.html', {'keywords': keywords})

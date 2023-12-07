@@ -2,6 +2,26 @@ from django.db import models
 from django.core import validators
 
 class UserInformation(models.Model):
+    """
+    Represents user information.
+
+    Attributes:
+        id (AutoField): The primary key for the user information.
+        first_name (CharField): The first name of the user.
+        last_name (CharField): The last name of the user.
+        middle_initial (CharField): The middle initial of the user (optional).
+        address (CharField): The address of the user.
+        city (CharField): The city of the user.
+        state (CharField): The state of the user.
+        zip_code (CharField): The zip code of the user, validated using a regular expression.
+        phone (CharField): The phone number of the user, validated using a regular expression.
+        email (EmailField): The email address of the user, validated using an email validator.
+        tagline (TextField): The tagline of the user, must be at least 10 characters long.
+
+    Methods:
+        __str__(): Returns a string representation of the user information.
+    """
+
     id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
