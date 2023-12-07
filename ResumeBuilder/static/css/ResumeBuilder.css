@@ -1,38 +1,4 @@
-/* body {
-    background-color: #006648;
-}
-
-h1 {
-    color: #ffffff;
-    text-align: center;
-}
-
-h2 {
-    color: #8dc63f;
-    text-align: center;
-}
-
-h3 {
-    color: #93b7d1;
-} 
-li {
-    list-style-type: none;
-    margin-bottom: 2px;
-    margin-top: 2px;
-    font-weight: bold;
-}
-
-label {
-    color: #000000;
-    font-weight: bold;
-}
-
-input {
-    border: solid 2px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-*/
+/*  Styling for the ResumeBuilder App */
 
 .resumeFields {
     display: flex;

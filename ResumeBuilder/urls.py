@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+# From the ResumeBuilder app, the urlpatterns sync all the urls within the app together
 urlpatterns = [
     path('', views.resume_builder, name='resume_builder'),
     path('send_work_history', views.send_work_history, name='send_work_history'),
