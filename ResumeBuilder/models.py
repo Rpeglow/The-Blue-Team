@@ -5,6 +5,7 @@ from UserInfo.models import UserInformation
 from ClassTracker.models import Course
 from ClassTracker.models import Skill, CourseSkill, UserCourse
 
+# Creates structure of information being passed to the database from the Work History Section
 class WorkHistory(models.Model):
     user = models.ForeignKey(UserInformation, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=100)
@@ -19,6 +20,7 @@ class WorkHistory(models.Model):
     def __str__(self):
         return self.company_name 
     
+# Creates structure of information being passed to the database from the Education Section
 class Education(models.Model):
     school_name = models.CharField(max_length=100)
     school_state = models.CharField(max_length=100)
@@ -30,8 +32,4 @@ class Education(models.Model):
        
     def __str__(self):
         return f'{self.school_name}, {self.degree}'
-
-
-#class PopulateKeywords(models.Model):
-#   skill_keyword = models.ForeignKey(Skill, on_delete=models.CASCADE)
         
