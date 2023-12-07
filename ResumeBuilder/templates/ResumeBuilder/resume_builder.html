@@ -282,6 +282,7 @@ Resume Builder
              
             // form validation for work history
             document.getElementById('workHistoryForm').addEventListener('submit', function(event) {
+                var cuser = document.getElementById('cuser').value;
                 var cname = document.getElementById('cname').value;
                 var cadd = document.getElementById('cadd').value;
                 var ccity = document.getElementById('ccity').value;
@@ -295,10 +296,15 @@ Resume Builder
                     alert('All fields are required.');
                     event.preventDefault();  // prevent form from submitting
                 }
+                if (cuser == '') {
+                    alert('Please select a user.');
+                    event.preventDefault();  // prevent form from submitting
+                }
             });
 
             // form validation for education
             document.getElementById('education').querySelector('form').addEventListener('submit', function(event) {
+                var suser = document.getElementById('suser').value;
                 var sname = document.getElementById('sname').value;
                 var sstate = document.getElementById('sstate').value;
                 var scity = document.getElementById('scity').value;
@@ -310,6 +316,10 @@ Resume Builder
                     alert('All fields are required.');
                     event.preventDefault();  // prevent form from submitting
                 }
+                if (suser == '') {
+                    alert('Please select a user.');
+                    event.preventDefault();  // prevent form from submitting
+                }
             });
 
             // form validation for generate_resume
@@ -317,7 +327,7 @@ Resume Builder
                 var resume_user_id = document.getElementById('user').value;
             
                 if (resume_user_id == '') {
-                    alert('Please Select a User.');
+                    alert('Please select a user.');
                     event.preventDefault();  // prevent form from submitting
                 }
             });
