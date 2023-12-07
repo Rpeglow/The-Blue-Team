@@ -242,7 +242,7 @@ Resume Builder
        
 
         <script>
-
+            // assigns variables to global_user
             document.getElementById('global_user').addEventListener('change', function() {
                 var global_user = this.value;
                 document.getElementById('user').value = global_user;
@@ -308,6 +308,17 @@ Resume Builder
 
                 if (!sname || !sstate || !scity || !degree || !sstart || !schoolend) {
                     alert('All fields are required.');
+                    event.preventDefault();  // prevent form from submitting
+                }
+            });
+
+
+            // form validation for generate_resume
+            document.getElementById('generate_resume').querySelector('form').addEventListener('submit', function(event) {
+                var resume_user_id = document.getElementById('user').value;
+
+                if (resume_user_id == '') {
+                    alert('Please Select a User.');
                     event.preventDefault();  // prevent form from submitting
                 }
             });
