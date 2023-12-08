@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import UserInformation
+from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
 
 class UserInformationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -63,11 +65,26 @@ class UserInformationForm(forms.ModelForm):
     state = forms.ChoiceField(choices=STATE_CHOICES)
 
     # Fields required for Django User creation
-    username = forms.CharField(max_length=150, widget=forms.TextInput(attrs={'autocomplete': 'username'}))
+    username = forms.RegexField(
+        regex=r'^[\w.@+-]{1,150}$',
+        max_length=150,
+        widget=forms.TextInput(),
+        validators=[
+            RegexValidator(
+                r'^[\w.@+-]{1,150}$',
+                'Enter a valid username. This value may contain only letters, digits, and @/./+/-/_ characters.',
+                'invalid_username'
+            )
+        ]
+    )
     email = forms.EmailField(widget=forms.EmailInput(attrs={'autocomplete': 'email'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}))
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}))
 
+    #setting autocomplete attributes for the rest of the fields
+    first_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete': 'given-name'}))
+    last_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete': 'family-name'}))
+    phone = forms.CharField(max_length=15, widget=forms.TextInput(attrs={'autocomplete': 'tel'}))
 
     class Meta:
         model = UserInformation
@@ -77,6 +94,16 @@ class UserInformationForm(forms.ModelForm):
             'tagline': forms.Textarea(attrs={'placeholder': 'Turning Bytes into Opportunities...'}),
         }
 
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        if password and confirm_password and password != confirm_password:
+            raise forms.ValidationError("Passwords do not match. Please confirm your password.")
+
+        return cleaned_data
+        
     def save(self, commit=True):
         # Save UserInformation fields
         user_info = super().save(commit=False)
@@ -85,8 +112,7 @@ class UserInformationForm(forms.ModelForm):
         user = User.objects.create_user(
             username=self.cleaned_data['username'],
             email=self.cleaned_data['email'],
-            password=self.cleaned_data['password'],  # Consider hashing the password
-            # Add any additional fields as necessary
+            password=self.cleaned_data['password']
         )
 
         user_info.user = user  # Assign the user to the UserInformation model

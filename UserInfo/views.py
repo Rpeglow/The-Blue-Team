@@ -30,6 +30,13 @@ def user_info_form(request):
                 error_message = 'User with this email already exists.'
                 return render(request, 'error_page.html', {'error_message': error_message})
             
+            password = form.cleaned_data['password']
+            confirm_password = form.cleaned_data['confirm_password']
+
+            if password != confirm_password:
+                form.add_error('confirm_password', 'Passwords do not match. Please confirm your password.')
+                return render(request, 'user_info_form.html', {'form': form})
+            
             # Create a Django User instance
             user = User.objects.create_user(
                 username=username,
@@ -56,6 +63,8 @@ def user_info_form(request):
 
             messages.success(request, 'User created successfully.')
             return redirect('confirmation_page')
+        else:
+            print(form.errors)
     else:
         form = UserInformationForm()
 
@@ -71,5 +80,5 @@ def confirmation_page(request):
     Returns:
         HttpResponse: The rendered template response.
     """
-    last_created_user = UserInformation.objects.last()
+    last_created_user = User.objects.last()
     return render(request, 'confirmation_page.html', {'user': last_created_user})
