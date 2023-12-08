@@ -302,6 +302,10 @@
                 text-align: left;
             }
 
+            .error {
+                color: red;
+            }
+
             @media screen and (max-width: 1920px){
                 #wrapper {
                     max-width: 90%;
@@ -354,20 +358,26 @@
             </style>
 		<title>{% block title %}{% endblock %}</title>
 	</head>
-
-	<body>
-		<!-- Navigation bar -->
-		<div class="topnav" id="myTopnav">
-			<a href="{% url 'image_page' %}">Home</a>
-			<a href="{% url 'class_tracker' %}">Course & Skill Search</a>
-			<a href="{% url 'resume_builder' %}">Resume Builder</a>
-			<a href="{% url 'job_search' %}">Job Search</a>
-            <a href="{% url 'user_info_form' %}" class="split">Sign Up</a>
-			<a href="{% url 'about' %}" class="split">About</a>
-			<a href="{% url 'FAQ' %}" class="split">FAQ</a>
-			<a href="javascript:void(0);" class="icon" onclick="responsiveNav()">&#9776;</a>
-		</div>
-
+    <body>
+        <!-- Navigation bar -->
+        <div class="topnav" id="myTopnav">
+            <a href="{% url 'image_page' %}">Home</a>
+            <a href="{% url 'class_tracker' %}">Course & Skill Search</a>
+            <a href="{% url 'resume_builder' %}">Resume Builder</a>
+            <a href="{% url 'job_search' %}">Job Search</a>
+    
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="split">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="split">Login</a>
+                <a href="{% url 'user_info_form' %}" class="split">Sign Up</a>
+            {% endif %}
+    
+            <a href="{% url 'about' %}" class="split">About</a>
+            <a href="{% url 'FAQ' %}" class="split">FAQ</a>
+            <a href="javascript:void(0);" class="icon" onclick="responsiveNav()">&#9776;</a>
+        </div>
+    
 		<div class="content">
 			{% block content %}
 			<!-- Main Content goes here -->
@@ -389,4 +399,23 @@
 			}
 		</script>
 	</body>
+
+    <script>
+        // Function to store the previous URL in sessionStorage
+        function storePreviousUrl() {
+            const currentUrl = window.location.href;
+            sessionStorage.setItem('previousUrl', currentUrl);
+        }
+    
+        // Event listener to store the previous URL when a link is clicked
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a'); // Select all links
+    
+            links.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    storePreviousUrl();
+                });
+            });
+        });
+    </script>
 </html>

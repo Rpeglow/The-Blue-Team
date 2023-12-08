@@ -11,6 +11,9 @@
         <h1>User Created</h1>
         {% if user %}
             <p>Created user for {{ user.first_name }} {{ user.last_name }}. User ID is {{ user.id }}</p>
+            <p>Email: {{ user.email }}</p>
+            <p>Username: {{ user.username }}</p>
+            <button onclick="window.location.href='{% url 'login' %}'">Login</button>
         {% else %}
             <p>No user information available.</p>
         {% endif %}

@@ -6,25 +6,71 @@ User Registration
 {% endblock %}
 
 {% block content %}
-
 <body>
     <div id="wrapper">
         <h1>User Registration</h1>
-        <p>Fill out the form below to create a new user.  Fields marked with <span>*</span> are required.</p>
+        <p>Fill out the form below to create a new user. Fields marked with <span>*</span> are required.</p>
         <div id="form-wrapper">
             <form method="post">
                 {% csrf_token %}
+                {% for error in form.non_field_errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
                 {% for field in form %}
-                    <p class="form-field">
-                        {{ field.label_tag }}
-                        {% if field.field.required %}
-                            <span>*</span>
-                        {% endif %}
-                        {{ field }}
-                        {% for error in field.errors %}
-                            <p class="error">{{ error }}</p>
-                        {% endfor %}
-                    </p>
+                    {% if field.name == 'username' %}
+                        <p class="form-field">
+                            {{ field.label_tag }}
+                            {% if field.field.required %}
+                                <span>*</span>
+                            {% endif %}
+                            {{ field }}
+                            {% for error in field.errors %}
+                                <p class="error">{{ error }}</p>
+                            {% endfor %}
+                        </p>
+                    {% endif %}
+                {% endfor %}
+                {% for field in form %}
+                    {% if field.name == 'password' %}
+                        <p class="form-field">
+                            {{ field.label_tag }}
+                            {% if field.field.required %}
+                                <span>*</span>
+                            {% endif %}
+                            {{ field }}
+                            {% for error in field.errors %}
+                                <p class="error">{{ error }}</p>
+                            {% endfor %}
+                        </p>
+                    {% endif %}
+                {% endfor %}
+                {% for field in form %}
+                    {% if field.name == 'confirm_password' %}
+                        <p class="form-field">
+                            {{ field.label_tag }}
+                            {% if field.field.required %}
+                                <span>*</span>
+                            {% endif %}
+                            {{ field }}
+                            {% for error in field.errors %}
+                                <p class="error">{{ error }}</p>
+                            {% endfor %}
+                        </p>
+                    {% endif %}
+                {% endfor %}
+                {% for field in form %}
+                    {% if field.name != 'username' and field.name != 'password' and field.name != 'confirm_password' %}
+                        <p class="form-field">
+                            {{ field.label_tag }}
+                            {% if field.field.required %}
+                                <span>*</span>
+                            {% endif %}
+                            {{ field }}
+                            {% for error in field.errors %}
+                                <p class="error">{{ error }}</p>
+                            {% endfor %}
+                        </p>
+                    {% endif %}
                 {% endfor %}
                 <button type="submit">Submit</button>
             </form>
@@ -45,4 +91,3 @@ User Registration
 </script>
 
 {% endblock %}
-

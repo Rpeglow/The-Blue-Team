@@ -3,7 +3,9 @@ from UserInfo.models import UserInformation
 from .models import Course, Skill, CourseSkill, UserCourse
 from .scraping import scrape_course_data
 from .ai import generate_skills_from_description
+from django.contrib.auth.decorators import login_required  
 
+@login_required
 def class_tracker(request):
     """
     Renders the class tracker page with a list of prefixes and users.
@@ -31,9 +33,9 @@ def class_tracker(request):
         "VISC", "WELD"
     ]
 
-    users = UserInformation.objects.all()
-    
-    return render(request, 'class_tracker.html', {'prefixes': prefixes, 'users': users})
+    user_info = get_object_or_404(UserInformation, user=request.user)
+
+    return render(request, 'class_tracker.html', {'prefixes': prefixes, 'user_info': user_info})
 
 
 def search_course(request):

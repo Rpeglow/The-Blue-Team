@@ -4,7 +4,9 @@ from .models import Job
 from UserInfo.models import UserInformation
 from ClassTracker.models import CourseSkill, UserCourse
 from .indeed import perform_job_search
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def job_search(request):
     """
     Renders the job search page.
@@ -15,8 +17,9 @@ def job_search(request):
     Returns:
         HttpResponse: The HTTP response.
     """
-    users = UserInformation.objects.all()
-    return render(request, 'job_search.html', {'users': users})
+    user_info = request.user.userinformation
+
+    return render(request, 'job_search.html', {'user_info': user_info})
 
 def fetch_skills(request, user_id):
     """
