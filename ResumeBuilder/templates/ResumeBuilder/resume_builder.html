@@ -13,34 +13,41 @@ Resume Builder
     </head>
 
     <body>
-        
-        <h1>Resume Builder</h1>
-        <h2>Take your time and develop a working portfolio!</h2>
         <div id="wrapper">
+            <h1>Resume Builder</h1>
+            <h2>Take your time and develop a working portfolio!</h2>
+            <p>Fields marked with <span>*</span> are required.</p>
             <!-- set global for whole page -->
             <div id="form-wrapper">
-
-            <p>
-                <label for="global_user">Select User:</label>
-                <select name="global_user" id="global_user" >
-                    <option value="" selected disabled>Select A User</option>
-                    {% for user in users %}
-                        <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
-                    {% endfor %}
-                </select>
-            </p>
-            <p>
-                <label for="global_category">Select Category:</label>
-                <select name="global_category" id="global_category">
-                    <option value="" selected disabled>Select A Category</option>
+                <p>
+                    <label for="global_user">Select User <span>*</span></label>
+                    <select name="global_user" id="global_user" required>
+                        <option value="" selected disabled>Select A User</option>
+                        {% for user in users %}
+                            <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+                        {% endfor %}
+                    </select>
+                </p>
+                <p>
+                    <label for="global_category">Select Category <span>*</span></label>
+                    <select name="global_category" id="global_category" required>
+                        <option value="" selected disabled>Select A Category</option>
                         <option value="category_work">Enter Work History</option>
                         <option value="category_education">Enter Education</option>
                         <option value="category_resume">Generate Resume</option>
-                </select>
-            </p>
+                    </select>
+                </p>
             </div><br>
 
-        
+            <div id="messages">
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
 
             <div class='resumeFields'>
             
@@ -52,20 +59,20 @@ Resume Builder
                             <input type="hidden" name="cuser" id="cuser" >
 
                             <p>
-                                <label for="cname">Company:</label><br>
-                                <input type="text" id="cname" name="cname">
+                                <label for="cname">Employer Name <span>*</span></label><br>
+                                <input type="text" id="cname" name="cname" required>
                             </p>
                             <p>
-                                <label for="cadd">Address:</label><br>
-                                <input type="text" id="cadd" name="cadd">
+                                <label for="cadd">Address <span>*</span></label><br>
+                                <input type="text" id="cadd" name="cadd" required>
                             </p>
                             <p>
-                                <label for="ccity">City:</label><br>
-                                <input type="text" id="ccity" name="ccity">
+                                <label for="ccity">City <span>*</span></label><br>
+                                <input type="text" id="ccity" name="ccity" required>
                             </p>
                             <p>
-                                <label for="cstate">State:</label><br>
-                                <select id="cstate" name="cstate">
+                                <label for="cstate">State <span>*</span></label><br>
+                                <select id="cstate" name="cstate" required>
                                     <option value="" selected disabled>Select State</option>
                                     <option value="AL">Alabama</option>
                                     <option value="AK">Alaska</option>
@@ -120,20 +127,20 @@ Resume Builder
                                 </select>
                             </p>
                             <p>
-                                <label for="czip">Zip:</label>
-                                <input type="text" id="czip" name="czip">
+                                <label for="czip">Zip <span>*</span></label>
+                                <input type="text" id="czip" name="czip" required>
                             </p>
                             <p>
-                                <label for="cphone">Phone:</label><br>
-                                <input type="tel" id="cphone" name="cphone">
+                                <label for="cphone">Phone <span>*</span></label><br>
+                                <input type="tel" id="cphone" name="cphone" required>
                             </p>
                             <p>
-                                <label for="cstart">Start Date:</label>
-                                <input type="date" id="cstart" name="cstart">
+                                <label for="cstart">Start Date <span>*</span></label>
+                                <input type="date" id="cstart" name="cstart" required>
                             </p>
                             <p>
-                                <label for="cend">End Date:</label>
-                                <input type="date" id="cend" name="cend">
+                                <label for="cend">End Date <span>*</span></label>
+                                <input type="date" id="cend" name="cend" required>
                             </p>
                             <input type="submit" id="submitOne" value="Submit">
                         </form>
@@ -148,16 +155,16 @@ Resume Builder
                             <input type="hidden" name="suser" id="suser" >
 
                             <p>
-                                <label for="sname">School:</label><br>
-                                <input type="text" id="sname" name="sname"><br>
+                                <label for="sname">School Name <span>*</span></label><br>
+                                <input type="text" id="sname" name="sname" required>
                             </p>
                             <p>
-                                <label for="scity">City:</label><br>
-                                <input type="text" id="scity" name="scity"><br>
+                                <label for="scity">City <span>*</span></label><br>
+                                <input type="text" id="scity" name="scity" required>
                             </p>
                             <p>
-                                <label for="sstate">State:</label><br>
-                                <select id="sstate" name="sstate">
+                                <label for="sstate">State <span>*</span></label><br>
+                                <select id="sstate" name="sstate" required>
                                     <option value="" selected disabled>Select State</option>
                                     <option value="AL">Alabama</option>
                                     <option value="AK">Alaska</option>
@@ -212,16 +219,16 @@ Resume Builder
                                 </select><br>
                             </p>
                             <p>
-                                <label for="degree">Degree/Certification:</label><br>
-                                <input type="text" id="degree" name="degree"><br>
+                                <label for="degree">Degree/Certification <span>*</span></label><br>
+                                <input type="text" id="degree" name="degree" required>
                             </p>
                             <p>
-                                <label for="sstart">Start Date:</label><br>
-                                <input type="date" id="sstart" name="sstart"><br>
+                                <label for="sstart">Start Date <span>*</span></label><br>
+                                <input type="date" id="sstart" name="sstart" required>
                             </p>
                             <p>
-                                <label for="schoolend">End Date:</label><br>
-                                <input type="date" id="schoolend" name="schoolend"><br>
+                                <label for="schoolend">End Date <span>*</span></label><br>
+                                <input type="date" id="schoolend" name="schoolend" required>
                             </p>
                             <input type="submit" id="submitTwo" value="Submit">
                         </form>
@@ -242,7 +249,6 @@ Resume Builder
        
 
         <script>
-
             document.getElementById('global_user').addEventListener('change', function() {
                 var global_user = this.value;
                 document.getElementById('user').value = global_user;
@@ -302,6 +308,17 @@ Resume Builder
                 }
             });
 
+            // format phone number
+            document.getElementById('cphone').addEventListener('keyup', function(e) {
+                var value = e.target.value;
+                value = value.replace(/-/g, '');
+                if (value.length > 3 && value.length <= 6)
+                    value = value.slice(0,3) + '-' + value.slice(3);
+                else if (value.length > 6)
+                    value = value.slice(0,3) + '-' + value.slice(3,6) + '-' + value.slice(6);
+                e.target.value = value;
+            });
+        
             // form validation for education
             document.getElementById('education').querySelector('form').addEventListener('submit', function(event) {
                 var suser = document.getElementById('suser').value;
@@ -331,6 +348,20 @@ Resume Builder
                     event.preventDefault();  // prevent form from submitting
                 }
             });
+
+            // Function to hide the messages after 5 seconds
+            function hideMessages() {
+                var messages = document.getElementById('messages');
+                if (messages) {
+                    setTimeout(function() {
+                        messages.style.display = 'none'; // Hide the messages after 5 seconds
+                    }, 5000); // Adjust the time (in milliseconds) as needed, here it's 5 seconds
+                }
+            }
+        
+            // Call the function when the page loads
+            hideMessages();
+
         </script>
 
     </body>

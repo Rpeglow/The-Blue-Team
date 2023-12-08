@@ -7,21 +7,20 @@
 
 {% block content %}
 <body>
-    <h1>Course Details</h1>
-    <div id="wrapper">
+	<div id="wrapper">
+    	<h1>Course Details</h1>
         <p>Course Number: {{ course.course_number }}</p>
         <p>Name: {{ course.name }}</p>
         <p>Description: {{ course.description }}</p>
 
         <h2>Related Skills</h2>
         <ul>
-          {% for course_skill in course.courseskill_set.all %}
-            <p>{{ course_skill.skills_id.skill_keyword }}</p>
-          {% empty %}
+        	{% for course_skill in course.courseskill_set.all %}
+            	<p>{{ course_skill.skills_id.skill_keyword }}</p>
+    		{% empty %}
             <li>No skills available for this course yet.</li>
-          {% endfor %}
+        	{% endfor %}
         </ul>
-
         <button onclick="window.location.href='{% url 'class_tracker' %}'">Return to Search</button>
     </div>
 </body>

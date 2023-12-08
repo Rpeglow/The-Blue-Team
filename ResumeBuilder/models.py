@@ -4,6 +4,7 @@ from django.utils import timezone
 from UserInfo.models import UserInformation
 from ClassTracker.models import Course
 from ClassTracker.models import Skill, CourseSkill, UserCourse
+from django.core import validators
 
 # Creates structure of information being passed to the database from the Work History Section
 class WorkHistory(models.Model):
@@ -29,8 +30,8 @@ class WorkHistory(models.Model):
     work_address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=30)
-    zip = models.CharField(max_length=15)
-    phone = models.CharField(max_length=20)
+    zip = models.CharField(max_length=15, validators=[validators.RegexValidator(regex=r'^\d{5}(?:-\d{4})?$', message='Zip code must be in the format XXXXX or XXXXX-XXXX')])
+    phone = models.CharField(max_length=20, validators=[validators.RegexValidator(regex=r'^\d{3}-\d{3}-\d{4}$', message='Phone number must be in the format XXX-XXX-XXXX')])
     start_date = models.DateField()
     end_date = models.DateField()
 

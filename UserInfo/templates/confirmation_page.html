@@ -7,8 +7,8 @@
 
 {% block content %}
 <body>
-    <h1>User Created</h1>
     <div id="wrapper">
+        <h1>User Created</h1>
         {% if user %}
             <p>Created user for {{ user.first_name }} {{ user.last_name }}. User ID is {{ user.id }}</p>
         {% else %}
