@@ -14,21 +14,13 @@
 <body>
     <div id="wrapper">
         <h1>Course & Skill Search</h1>
-        <h2>Search for a Course</h2>
+        <h2>Welcome, {{ user_info.first_name }}!</h2>
         <p>Search for a course by prefix and number. For example, to search for SDEV 240, select "SDEV" from the dropdown menu and enter "240" in the text box.</p>
         <p>Fields marked with <span>*</span> are required.</p>
         <div id="form-wrapper">
             <form method="post" action="{% url 'search_course' %}" onsubmit="return validateForm()">
                 {% csrf_token %}
-                <p>
-                    <label for="user">Select User<span>*</span></label>
-                    <select name="user" id="user" required>
-                        <option value="" selected disabled>Select A User</option>
-                        {% for user in users %}
-                            <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
-                        {% endfor %}
-                    </select>
-                </p>
+                <input type="hidden" name="user" value="{{ user_info.id }}" required>
                 <p>
                     <label for="prefix">Select Class Prefix<span>*</span></label>
                     <select name="prefix" id="prefix" required>

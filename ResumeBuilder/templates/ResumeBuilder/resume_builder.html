@@ -20,15 +20,6 @@ Resume Builder
             <!-- set global for whole page -->
             <div id="form-wrapper">
                 <p>
-                    <label for="global_user">Select User <span>*</span></label>
-                    <select name="global_user" id="global_user" required>
-                        <option value="" selected disabled>Select A User</option>
-                        {% for user in users %}
-                            <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
-                        {% endfor %}
-                    </select>
-                </p>
-                <p>
                     <label for="global_category">Select Category <span>*</span></label>
                     <select name="global_category" id="global_category" required>
                         <option value="" selected disabled>Select A Category</option>
@@ -56,7 +47,7 @@ Resume Builder
                     <div id="form-wrapper">
                         <!-- get user first, two forms -->
                         <form id="workHistoryForm" method="POST" action="{% url 'send_work_history' %}">{% csrf_token %}
-                            <input type="hidden" name="cuser" id="cuser" >
+                            <input type="hidden" name="cuser" id="cuser" value="{{ user_info.id }}">
 
                             <p>
                                 <label for="cname">Employer Name <span>*</span></label><br>
@@ -152,7 +143,7 @@ Resume Builder
 
                     <div id="form-wrapper">
                         <form method='POST' action= "{% url 'send_education' %}"> {% csrf_token %}
-                            <input type="hidden" name="suser" id="suser" >
+                            <input type="hidden" name="suser" id="suser" value="{{ user_info.id }}">
 
                             <p>
                                 <label for="sname">School Name <span>*</span></label><br>
@@ -240,7 +231,7 @@ Resume Builder
                 <h3>Generate Resume</h3>
                 <form method="POST" action="{% url 'generated_resume' %}">
                     {% csrf_token %}
-                    <input type="hidden" name="user" id="user">
+                    <input type="hidden" name="user" id="user" value="{{ user_info.id }}">
                     <button type="submit" id="submitThree">Generate Resume</button>
                 </form>
                 </div>
@@ -249,21 +240,13 @@ Resume Builder
        
 
         <script>
-            document.getElementById('global_user').addEventListener('change', function() {
-                var global_user = this.value;
-                document.getElementById('user').value = global_user;
-                document.getElementById('cuser').value = global_user;
-                document.getElementById('suser').value = global_user;
-            });
-
-            // user must be selected before submitting forms
             window.onload = function() {
             // Hide the forms initially
             document.getElementById('workHistory').style.display = 'none';
             document.getElementById('education').style.display = 'none';
             document.getElementById('generate_resume').style.display = 'none';
 
-            // Show the forms when a user is selected
+            // Show the forms when a category is selected
             document.getElementById('global_category').addEventListener('change', function() {
                 if (this.value == "category_work") {
                     document.getElementById('workHistory').style.display = 'block';
@@ -284,7 +267,6 @@ Resume Builder
                         }
                     });
                 };
-            //form validation for global user
              
             // form validation for work history
             document.getElementById('workHistoryForm').addEventListener('submit', function(event) {

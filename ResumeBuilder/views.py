@@ -5,8 +5,11 @@ from .models import WorkHistory
 from .models import Education
 from .models import UserInformation
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 
 # Information from UserInformation class is passed to resumer_builder page
+@login_required
 def resume_builder(request):
     """
     Renders the resume builder page.
@@ -17,8 +20,9 @@ def resume_builder(request):
     Returns:    
         HttpResponse: The HTTP response.
     """
-    users = UserInformation.objects.all()
-    return render(request, 'ResumeBuilder/resume_builder.html', {'users': users})
+    user_info = request.user.userinformation
+
+    return render(request, 'ResumeBuilder/resume_builder.html', {'user_info': user_info})
 
 # Information from classes: UserInformation, WorkHistory, Education, and UserCourse
 # is passed to generated_resume page
@@ -64,7 +68,8 @@ def send_work_history(request):
     Returns:
         HttpResponse: The HTTP response.
     """
-    users = UserInformation.objects.all()
+    user_info = request.user.userinformation
+
     if request.method == 'POST':
         company_name = request.POST['cname']
         work_address = request.POST['cadd']
@@ -84,13 +89,16 @@ def send_work_history(request):
         
         work_history_entry, created = WorkHistory.objects.get_or_create(
         company_name = company_name,
-        defaults={'user': user, 'work_address': work_address, 'city': city, 'state': state, 'zip': zip, 'phone': phone, 'start_date': start_date, 'end_date': end_date}
+        user = user,
+        start_date = start_date,
+        end_date = end_date,
+        defaults={'work_address': work_address, 'city': city, 'state': state, 'zip': zip, 'phone': phone}
         )
         if created:
             messages.success(request, 'Work history successfully added!')
         else:
             messages.error(request, 'Work history entry already exists!')
-    return render(request, 'ResumeBuilder/resume_builder.html', {'users': users})
+    return render(request, 'ResumeBuilder/resume_builder.html', {'user_info': user_info})
 
 # Information entered in the Education section is sent to the database
 def send_education(request):
@@ -103,7 +111,8 @@ def send_education(request):
     Returns:
         HttpResponse: The HTTP response.
     """
-    users = UserInformation.objects.all()
+    user_info = request.user.userinformation
+
     if request.method == 'POST':
         school_name =request.POST['sname']
         school_state = request.POST['sstate']
@@ -128,7 +137,7 @@ def send_education(request):
         else:
             messages.error(request, 'Education entry already exists!')
 
-    return render(request, 'ResumeBuilder/resume_builder.html', {'users': users})
+    return render(request, 'ResumeBuilder/resume_builder.html', {'user_info': user_info})
 
 
 
