@@ -93,7 +93,7 @@
             h5 {
                 font-weight: 700;
                 line-height: 1.2;
-                margin: 1em 0 .25em
+                margin: 1em 0 .25em;
             }
             
             h2:first-child,
@@ -301,6 +301,12 @@
                 width: 80%;
                 text-align: left;
             }
+
+            @media screen and (max-width: 1920px){
+                #wrapper {
+                    max-width: 90%;
+                }
+            }
             
             @media screen and (max-width: 810px) {
             
@@ -353,10 +359,10 @@
 		<!-- Navigation bar -->
 		<div class="topnav" id="myTopnav">
 			<a href="{% url 'image_page' %}">Home</a>
-			<a href="{% url 'user_info_form' %}">New User Creation</a>
 			<a href="{% url 'class_tracker' %}">Course & Skill Search</a>
 			<a href="{% url 'resume_builder' %}">Resume Builder</a>
 			<a href="{% url 'job_search' %}">Job Search</a>
+            <a href="{% url 'user_info_form' %}" class="split">Sign Up</a>
 			<a href="{% url 'about' %}" class="split">About</a>
 			<a href="{% url 'FAQ' %}" class="split">FAQ</a>
 			<a href="javascript:void(0);" class="icon" onclick="responsiveNav()">&#9776;</a>

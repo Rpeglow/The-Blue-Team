@@ -4,8 +4,7 @@ from django.http import HttpResponse
 from .models import WorkHistory
 from .models import Education
 from .models import UserInformation
-
-
+from django.contrib import messages
 
 # Information from UserInformation class is passed to resumer_builder page
 def resume_builder(request):
@@ -83,10 +82,14 @@ def send_work_history(request):
         
         # Conditionals Here for error handling
         
-        work_history_entry = WorkHistory.objects.get_or_create(
+        work_history_entry, created = WorkHistory.objects.get_or_create(
         company_name = company_name,
         defaults={'user': user, 'work_address': work_address, 'city': city, 'state': state, 'zip': zip, 'phone': phone, 'start_date': start_date, 'end_date': end_date}
         )
+        if created:
+            messages.success(request, 'Work history successfully added!')
+        else:
+            messages.error(request, 'Work history entry already exists!')
     return render(request, 'ResumeBuilder/resume_builder.html', {'users': users})
 
 # Information entered in the Education section is sent to the database
@@ -114,12 +117,17 @@ def send_education(request):
         user = get_object_or_404(UserInformation, pk=user_id)
 
     
-        eduction_entry = Education.objects.get_or_create(
+        education_entry, created = Education.objects.get_or_create(
             school_name = school_name,
             degree = degree,
             user = user,
             defaults={'school_state': school_state,'school_city': school_city,'school_start_date': school_start_date, 'school_end_date': school_end_date}
             )
+        if created:
+            messages.success(request, 'Education history successfully added!')
+        else:
+            messages.error(request, 'Education entry already exists!')
+
     return render(request, 'ResumeBuilder/resume_builder.html', {'users': users})
 
 

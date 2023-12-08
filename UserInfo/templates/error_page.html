@@ -8,8 +8,8 @@ Error Creating User
 {% block content %}
 
 <body>
-    <h1>Error</h1>
     <div id="wrapper">
+        <h1>Error</h1>
         <p>{{ error_message }}</p>
         <button onclick="window.location.href='{% url 'user_info_form' %}'">Return to Form</button>
     </div>
