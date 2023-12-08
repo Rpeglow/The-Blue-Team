@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Server Error
+{% endblock %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="5; URL={% url 'image_page' %}">
+    <title>Logout</title>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Logout Successful</h1>
+        <p>You have been logged out.</p>
+        <p>Redirecting to home page in 5 seconds...</p>
+        <p>If you are not automatically redirected, <a href="{% url 'image_page' %}">click here</a>.</p>
+    </div>
+</body>
+</html>
+{% endblock %}

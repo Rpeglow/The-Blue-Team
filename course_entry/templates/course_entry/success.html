@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Server Error
+{% endblock %}
+
+{% block content %}
+<head>
+    <script>
+        // Function to redirect to previous page
+        function redirectToPrevious() {
+            const previousUrl = sessionStorage.getItem('previousUrl');
+            if (previousUrl) {
+                window.location.href = previousUrl;
+            } else {
+                // Redirect to a default page if there's no previous URL stored
+                window.location.href = '/';
+            }
+        }
+    </script>
+</head>
+<body onload="redirectToPrevious()">
+    <div id="wrapper">
+        <h1>Login Successful</h1>
+        <p>Redirecting...</p>
+    </div>
+</body>
+{% endblock %}

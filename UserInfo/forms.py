@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 from .models import UserInformation
 
 class UserInformationForm(forms.ModelForm):
@@ -61,9 +62,37 @@ class UserInformationForm(forms.ModelForm):
 
     state = forms.ChoiceField(choices=STATE_CHOICES)
 
+    # Fields required for Django User creation
+    username = forms.CharField(max_length=150, widget=forms.TextInput(attrs={'autocomplete': 'username'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'autocomplete': 'email'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}))
+    confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}))
+
+
     class Meta:
         model = UserInformation
+        exclude = ['user'] 
         fields = '__all__'
         widgets = {
             'tagline': forms.Textarea(attrs={'placeholder': 'Turning Bytes into Opportunities...'}),
         }
+
+    def save(self, commit=True):
+        # Save UserInformation fields
+        user_info = super().save(commit=False)
+        
+        # Create Django User instance and set attributes
+        user = User.objects.create_user(
+            username=self.cleaned_data['username'],
+            email=self.cleaned_data['email'],
+            password=self.cleaned_data['password'],  # Consider hashing the password
+            # Add any additional fields as necessary
+        )
+
+        user_info.user = user  # Assign the user to the UserInformation model
+
+        if commit:
+            user.save()
+            user_info.save()
+
+        return user_info
