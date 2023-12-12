@@ -71,6 +71,7 @@ def send_work_history(request):
     user_info = request.user.userinformation
 
     if request.method == 'POST':
+        job_title = request.POST['job_title']
         company_name = request.POST['cname']
         work_address = request.POST['cadd']
         city = request.POST['ccity']
@@ -79,15 +80,15 @@ def send_work_history(request):
         phone = request.POST['cphone']
         start_date = request.POST['cstart']
         end_date = request.POST['cend']
-        # c user
         user_id = request.POST['cuser']
         
         user = get_object_or_404(UserInformation, pk=user_id)
+        
+        if end_date == '':
+            end_date = None
 
-        
-        # Conditionals Here for error handling
-        
         work_history_entry, created = WorkHistory.objects.get_or_create(
+        job_title = job_title,
         company_name = company_name,
         user = user,
         start_date = start_date,
@@ -120,12 +121,13 @@ def send_education(request):
         degree = request.POST['degree']
         school_start_date =request.POST['sstart']
         school_end_date = request.POST['schoolend']
-        # s user
         user_id = request.POST['suser']
 
         user = get_object_or_404(UserInformation, pk=user_id)
 
-    
+        if school_end_date == '':
+            school_end_date = None
+
         education_entry, created = Education.objects.get_or_create(
             school_name = school_name,
             degree = degree,

@@ -85,11 +85,16 @@ Generated Resume
                 <h3>Work Experience:</h3>
                 {% for job in work_experience %}
                     <div class="job">
+                        <p><strong>Job Title:</strong> {{ job.job_title }}</p>
                         <p><strong>Company:</strong> {{ job.company_name }}</p>
                         <p><strong>Address:</strong> {{ job.work_address }}, {{ job.city }}, {{ job.state }}, {{ job.zip }}</p>
                         <p><strong>Employer Phone:</strong> {{ job.phone }}</p>
                         <p><strong>Start Date:</strong> {{ job.start_date }}</p>
-                        <p><strong>End Date:</strong> {{ job.end_date }}</p>
+                        {% if job.end_date %}
+                            <p><strong>End Date:</strong> {{ job.end_date }}</p>
+                        {% else %}
+                            <p><strong>End Date:</strong> Present</p>
+                        {% endif %}
                         <br>
                     </div>
                 {% endfor %}
@@ -105,7 +110,11 @@ Generated Resume
                         <p><strong>Location:</strong> {{ school.school_city }}, {{ school.school_state }}</p>
                         <p><strong>Degree/Certification Earned:</strong> {{ school.degree }}</p>
                         <p><strong>Start Date:</strong> {{ school.school_start_date }}</p>
-                        <p><strong>End Date:</strong> {{ school.school_end_date }}</p>
+                        {% if school.school_end_date %}
+                            <p><strong>End Date:</strong> {{ school.school_end_date }}</p>
+                        {% else %}
+                            <p><strong>End Date:</strong> Not Yet Completed</p>
+                        {% endif %}
                         <br>
                     </div>
                 {% endfor %}
