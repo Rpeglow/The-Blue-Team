@@ -5,6 +5,7 @@ from UserInfo.models import UserInformation
 from ClassTracker.models import CourseSkill, UserCourse
 from .indeed import perform_job_search
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 @login_required
 def job_search(request):
@@ -54,6 +55,8 @@ def confirm_job_search(request):
     Returns:
         HttpResponse: The HTTP response.
     """
+    user_info = request.user.userinformation
+
     if request.method == 'POST':
         user_id = request.POST.get('user_id')
         keywords = request.POST.getlist('selected_skills')
@@ -76,8 +79,10 @@ def confirm_job_search(request):
                             hyperlink=job_data['hyperlink']
                         )
                         job.save()
-                        
-                return render(request, 'job_list.html', {'jobs': jobs})
+                
+                if user_id:
+                    request.session['deleted_user_id'] = int(user_id)        
+                return redirect('load_previous_jobs')
 
     return render(request, 'no_jobs_found.html')
 
@@ -92,12 +97,41 @@ def load_previous_jobs(request):
     Returns:
         HttpResponse: The HTTP response.
     """
-    if request.method == 'POST':
-        user_id = request.POST.get('p_user_id')
+    user_info = request.user.userinformation
 
+    user_id = request.POST.get('p_user_id')
+    stored_user_id = request.session.pop('deleted_user_id', None)
+
+    if user_id:
+        user_id = int(user_id)
+
+    final_user_id = user_id if user_id is not None else stored_user_id
+
+    if final_user_id:
+        user = UserInformation.objects.get(pk=final_user_id)
+        jobs = Job.objects.filter(user=user)
+        return render(request, 'job_list.html', {'jobs': jobs, 'user_info': user_info})
+
+    return render(request, 'no_jobs_found.html')
+        
+def delete_job(request, job_id):
+    """
+    Deletes a job.
+
+    Args:
+        request (HttpRequest): The HTTP request.
+        job_id (int): The ID of the job to delete.
+
+    Returns:
+        HttpResponse: The HTTP response.
+    """
+    job = get_object_or_404(Job, pk=job_id)
+    user_id = request.POST.get('user')
+
+    if request.method == 'POST':
+        job.delete()
         if user_id:
-            user = UserInformation.objects.get(pk=user_id)  
+            request.session['deleted_user_id'] = int(user_id)
+        return redirect('load_previous_jobs')
     
-            jobs = Job.objects.filter(user=user)
-            
-            return render(request, 'job_list.html', {'jobs': jobs})
+    return render(request, 'job_list.html', {'job': job})

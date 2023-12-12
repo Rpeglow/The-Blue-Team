@@ -12,13 +12,16 @@
     <title>Course & Skill Search</title>
 </head>
 <body>
+    <div class="spinner" id="spinner"></div>
+    <div class="page-overlay" id="pageOverlay"></div>
+
     <div id="wrapper">
         <h1>Course & Skill Search</h1>
         <h2>Welcome, {{ user_info.first_name }}!</h2>
         <p>Search for a course by prefix and number. For example, to search for SDEV 240, select "SDEV" from the dropdown menu and enter "240" in the text box.</p>
         <p>Fields marked with <span>*</span> are required.</p>
         <div id="form-wrapper">
-            <form method="post" action="{% url 'search_course' %}" onsubmit="return validateForm()">
+            <form id="search_course" method="post" action="{% url 'search_course' %}" onsubmit="return validateForm()">
                 {% csrf_token %}
                 <input type="hidden" name="user" value="{{ user_info.id }}" required>
                 <p>
@@ -49,6 +52,22 @@
         }
         return true;
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchForm = document.getElementById('search_course');
+        const spinner = document.getElementById('spinner');
+        const pageOverlay = document.getElementById('pageOverlay');
+
+        searchForm.addEventListener('submit', function(event) {
+            spinner.style.display = 'block';
+            pageOverlay.style.display = 'block';
+        });
+
+        window.addEventListener('beforeunload', function() {
+            spinner.style.display = 'none';
+            pageOverlay.style.display = 'none';
+        });
+    });
 </script>
 </html>
 {% endblock %}

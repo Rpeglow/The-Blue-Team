@@ -306,6 +306,63 @@
                 color: red;
             }
 
+            /* Style for the delete 'X' */
+            .delete-job {
+                position: relative;
+            }
+    
+            .delete-job .delete-button {
+                position: absolute;
+                top: -10px;
+                right: -10px;
+                color: red;
+                cursor: pointer;
+            }
+
+            /* Style for the spinner */
+            .spinner {
+                display: none;
+                position: fixed;
+                z-index: 9999;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+    
+            /* Style for the spinner animation */
+            .spinner:before {
+                content: '';
+                box-sizing: border-box;
+                position: absolute;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: 4px solid #ccc;
+                border-top-color: #333;
+                animation: spin 1s ease-in-out infinite;
+            }
+    
+            @keyframes spin {
+                0% {
+                    transform: rotate(0);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            /* Style for the page overlay */
+            .page-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 9998;
+            }
+
             @media screen and (max-width: 1920px){
                 #wrapper {
                     max-width: 90%;

@@ -36,6 +36,9 @@ Job Search
     </script>
 </head>
 <body>
+    <div class="spinner" id="spinner"></div>
+    <div class="page-overlay" id="pageOverlay"></div>
+
     <div id="wrapper">
         <h1>Job Search</h1>
         <h2>Welcome, {{ user_info.first_name }}!</h2>
@@ -49,7 +52,7 @@ Job Search
                     <button type="submit">Load Previous Jobs</button>
                 </form><br><br>
 
-                <form action="{% url 'confirm_job_search' %}" method="post">
+                <form id="search-form" action="{% url 'confirm_job_search' %}" method="post">
                     {% csrf_token %}
                     <input type="hidden" name="user_id" id="user_id" value="{{ user_info.id }}">
                     <div id="skills"></div>
@@ -58,5 +61,23 @@ Job Search
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchForm = document.getElementById('search-form');
+            const spinner = document.getElementById('spinner');
+            const pageOverlay = document.getElementById('pageOverlay');
+
+            searchForm.addEventListener('submit', function(event) {
+                spinner.style.display = 'block';
+                pageOverlay.style.display = 'block';
+            });
+
+            window.addEventListener('beforeunload', function() {
+                spinner.style.display = 'none';
+                pageOverlay.style.display = 'none';
+            });
+        });
+    </script>
 </body>
 {% endblock %}
