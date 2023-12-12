@@ -25,5 +25,5 @@ class Job(models.Model):
     user = models.ForeignKey(UserInformation, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.job_name}"
+        return f"{self.user}, {self.job_name}"
 
