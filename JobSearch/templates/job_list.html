@@ -13,14 +13,22 @@ Job List
         <div class="container">
             <ul class="job_list">
                 {% for job in jobs %}
-                    <li>
-                        <h3>{{ job.job_name }}</h3>
-                        {% if job.salary_range != 'N/A' %}
-                            <p>Salary Range: {{ job.salary_range }}</p>
-                        {% endif %}
-                        <p>Company Information: {{ job.description }}</p>
-                        <a href="{{ job.hyperlink }}" target="_blank">Job Link</a><br><br><br>
-                    </li>
+                    <p>
+                        <div class="delete-job">
+                            <h3>{{ job.job_name }}</h3>
+                            {% if job.salary_range != 'N/A' %}
+                                <p>Salary Range: {{ job.salary_range }}</p>
+                            {% endif %}
+                            <p>Company Information: {{ job.description }}</p>
+                            <a href="{{ job.hyperlink }}" target="_blank">Job Link</a>
+                            <form method="post" action="{% url 'delete_job' job.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="user" id="user" value="{{ user_info.id }}">
+                            </form>
+                            <!-- Red 'X' for delete -->
+                            <span class="delete-button">❌</span>
+                        </div>
+                    </p><br><br>
                 {% endfor %}
             </ul>
         </div>
@@ -29,5 +37,26 @@ Job List
         {% endif %}
         <button onclick="window.location.href='{% url 'job_search' %}'">Return to Search</button>
     </div>
+
+    <!-- JavaScript for delete confirmation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll('.delete-button');
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const confirmDelete = confirm('Are you sure you want to delete this job?');
+
+                    if (confirmDelete) {
+                        // If confirmed, submit the form
+                        const form = this.parentElement.querySelector('form');
+                        if (form) {
+                            form.submit();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 {% endblock %}
