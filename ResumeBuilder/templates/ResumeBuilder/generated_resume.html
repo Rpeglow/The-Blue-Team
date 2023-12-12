@@ -8,7 +8,65 @@ Generated Resume
 {% block content %}
 <html>
     <head>
-        <link rel="stylesheet" href="{% static 'CSS/GeneratedResume.css' %}">
+        <style>
+            /* Reset and General Styles */
+            body {
+                background-color: #f9f9f9;
+                color: #333;
+                margin: 0;
+                padding: 0;
+                line-height: 1.6;
+            }
+
+            .container {
+                font-family: Arial, sans-serif;
+                width: 80%;
+                margin: 20px auto;
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            h3 {
+                color: #006648;
+                border-bottom: 1px solid #ccc;
+                padding-bottom: 5px;
+                margin-bottom: 15px;
+                padding-top: 10px;
+            }
+
+            .user-info {
+                text-align: center;
+            }
+
+            .user-info p, .education p, .job p {
+                margin: 0;
+            }
+
+            .skills ul {
+                columns: 2;
+                -webkit-columns: 2;
+                -moz-columns: 2;
+                list-style: none;
+                padding: 0;
+            }
+
+            /* Section-Specific Styles */
+            .user-info,
+            .work-experience,
+            .education,
+            .skills {
+                width: 80%;
+                margin-bottom: 30px;
+            }
+
+            .work-experience h3,
+            .education h3,
+            .skills h3 {
+                font-size: 1.5em;
+            }
+        </style>
     </head>
 
     <body>
