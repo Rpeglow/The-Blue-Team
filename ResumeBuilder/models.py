@@ -13,6 +13,7 @@ class WorkHistory(models.Model):
 
     Attributes:
         user (ForeignKey): The user.
+        job_title (CharField): The job title for the entry.
         company_name (CharField): The company name.
         work_address (CharField): The work address.
         city (CharField): The city.
@@ -26,6 +27,7 @@ class WorkHistory(models.Model):
         __str__(): Returns a string representation of the work history.
     """
     user = models.ForeignKey(UserInformation, on_delete=models.CASCADE)
+    job_title = models.CharField(max_length=100, blank=True)
     company_name = models.CharField(max_length=100)
     work_address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
@@ -33,7 +35,7 @@ class WorkHistory(models.Model):
     zip = models.CharField(max_length=15, validators=[validators.RegexValidator(regex=r'^\d{5}(?:-\d{4})?$', message='Zip code must be in the format XXXXX or XXXXX-XXXX')])
     phone = models.CharField(max_length=20, validators=[validators.RegexValidator(regex=r'^\d{3}-\d{3}-\d{4}$', message='Phone number must be in the format XXX-XXX-XXXX')])
     start_date = models.DateField()
-    end_date = models.DateField()
+    end_date = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.company_name 
@@ -60,7 +62,7 @@ class Education(models.Model):
     school_city = models.CharField(max_length=100)
     degree = models.CharField(max_length=100)
     school_start_date = models.DateField()
-    school_end_date = models.DateField()
+    school_end_date = models.DateField(blank=True, null=True)
     user = models.ForeignKey(UserInformation, on_delete=models.CASCADE)
        
     def __str__(self):

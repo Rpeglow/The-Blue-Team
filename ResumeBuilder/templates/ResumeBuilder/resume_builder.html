@@ -72,7 +72,10 @@ Resume Builder
                         <!-- get user first, two forms -->
                         <form id="workHistoryForm" method="POST" action="{% url 'send_work_history' %}">{% csrf_token %}
                             <input type="hidden" name="cuser" id="cuser" value="{{ user_info.id }}">
-
+                            <p>
+                                <label for="job_title">Employer Name <span>*</span></label><br>
+                                <input type="text" id="job_title" name="job_title" required>
+                            </p>
                             <p>
                                 <label for="cname">Employer Name <span>*</span></label><br>
                                 <input type="text" id="cname" name="cname" required>
@@ -154,8 +157,8 @@ Resume Builder
                                 <input type="date" id="cstart" name="cstart" required>
                             </p>
                             <p>
-                                <label for="cend">End Date <span>*</span></label>
-                                <input type="date" id="cend" name="cend" required>
+                                <label for="cend">End Date</label>
+                                <input type="date" id="cend" name="cend">
                             </p>
                             <input type="submit" id="submitOne" value="Submit">
                         </form>
@@ -242,8 +245,8 @@ Resume Builder
                                 <input type="date" id="sstart" name="sstart" required>
                             </p>
                             <p>
-                                <label for="schoolend">End Date <span>*</span></label><br>
-                                <input type="date" id="schoolend" name="schoolend" required>
+                                <label for="schoolend">End Date</label><br>
+                                <input type="date" id="schoolend" name="schoolend">
                             </p>
                             <input type="submit" id="submitTwo" value="Submit">
                         </form>
@@ -302,9 +305,8 @@ Resume Builder
                 var czip = document.getElementById('czip').value;
                 var cphone = document.getElementById('cphone').value;
                 var cstart = document.getElementById('cstart').value;
-                var cend = document.getElementById('cend').value;
 
-                if (!cname || !cadd || !ccity || !cstate || !czip || !cphone || !cstart || !cend) {
+                if (!cname || !cadd || !ccity || !cstate || !czip || !cphone || !cstart) {
                     alert('All fields are required.');
                     event.preventDefault();  // prevent form from submitting
                 }
@@ -333,9 +335,8 @@ Resume Builder
                 var scity = document.getElementById('scity').value;
                 var degree = document.getElementById('degree').value;
                 var sstart = document.getElementById('sstart').value;
-                var schoolend = document.getElementById('schoolend').value;
 
-                if (!sname || !sstate || !scity || !degree || !sstart || !schoolend) {
+                if (!sname || !sstate || !scity || !degree || !sstart) {
                     alert('All fields are required.');
                     event.preventDefault();  // prevent form from submitting
                 }
