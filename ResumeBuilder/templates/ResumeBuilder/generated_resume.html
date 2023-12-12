@@ -130,19 +130,22 @@ Generated Resume
     </body>
     <script>
         document.getElementById('export-btn').addEventListener('click', function () {
-            const element = document.getElementById('container'); // Select the container div
+            const element = document.getElementById('container');
     
-            // Configuration for PDF generation
+            // Configuration for PDF generation with expanded page dimensions and delay
             const opt = {
-                margin: 0.5,
+                margin: 0,
                 filename: 'generated_resume.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
+                html2canvas: { scale: 2, dpi: 300, letterRendering: true, useCORS: true, scrollX: 0, scrollY: 0 },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
     
-            // Call html2pdf to generate the PDF
-            html2pdf().from(element).set(opt).save();
+            // Add a delay before generating the PDF
+            setTimeout(function() {
+                // Call html2pdf to generate the PDF after the delay
+                html2pdf().from(element).set(opt).save();
+            }, 1000);
         });
     </script>
 </html>
