@@ -8,6 +8,7 @@ Generated Resume
 {% block content %}
 <html>
     <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
         <style>
             /* Reset and General Styles */
             body {
@@ -70,7 +71,7 @@ Generated Resume
     </head>
 
     <body>
-        <div class="container">
+        <div class="container" id="container">
             <h1>{{ user.first_name }} {{ user.last_name }}</h1>
             <div class="user-info">
                 <h4>{{ user.tagline }}</h4>
@@ -123,8 +124,26 @@ Generated Resume
             {% endif %}
         </div>
         <div id="wrapper">
+            <button id="export-btn">Export as PDF</button>
             <button onclick="window.location.href='{% url 'resume_builder' %}'">Return to Resume Builder</button>
         </div>
     </body>
+    <script>
+        document.getElementById('export-btn').addEventListener('click', function () {
+            const element = document.getElementById('container'); // Select the container div
+    
+            // Configuration for PDF generation
+            const opt = {
+                margin: 0.5,
+                filename: 'generated_resume.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+    
+            // Call html2pdf to generate the PDF
+            html2pdf().from(element).set(opt).save();
+        });
+    </script>
 </html>
 {% endblock %}
