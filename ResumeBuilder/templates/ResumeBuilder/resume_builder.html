@@ -73,7 +73,7 @@ Resume Builder
                         <form id="workHistoryForm" method="POST" action="{% url 'send_work_history' %}">{% csrf_token %}
                             <input type="hidden" name="cuser" id="cuser" value="{{ user_info.id }}">
                             <p>
-                                <label for="job_title">Employer Name <span>*</span></label><br>
+                                <label for="job_title">Job Title <span>*</span></label><br>
                                 <input type="text" id="job_title" name="job_title" required>
                             </p>
                             <p>
